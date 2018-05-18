@@ -119,6 +119,7 @@
         },
         methods: {
             addPermission:function(){
+                console.log(this.$router);
                 let prop_value={
                         permission_name: '',
                         id: null,

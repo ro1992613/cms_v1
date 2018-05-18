@@ -14,7 +14,7 @@
 <template>
     <div class="layout">
         <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
-            <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']" @on-select="clickMenuItem">
+            <Menu active-name="" theme="dark" width="auto" :open-names="['1']" @on-select="clickMenuItem">
                 <Submenu name="#">
                     <template slot="title">
                         <Icon type="ios-navigate"></Icon>
@@ -41,6 +41,7 @@
                 <Breadcrumb :style="{margin: '16px 0'}">
                     <BreadcrumbItem>Home</BreadcrumbItem>
                 </Breadcrumb>
+                <tab-menu :prop_value="tag_page"></tab-menu>
                 <Card>
                     <div style="height: auto;min-height:600px;">
                         <router-view></router-view>
@@ -57,28 +58,54 @@
     export default {
         data () {
             return {
-                opened_page:[]
+                tag_page:{
+                    currentpage:{},
+                    opened_page:[]
+                }
             };
         },
         components:{
+           tabMenu 
         },
         computed: {
         },
         methods: {
             clickMenuItem (name) {
                 this.$router.push(name);
-                let page={};
-                page.title=this.$router.currentRoute.name;
-                page.path=this.$router.currentRoute.path;
-                this.$data.opened_page.push(page);
-                console.log( this.$data.opened_page);
+            },
+            getCurrentPath:function(){
+                return this.$router.currentRoute.path;
             }
         },
         mounted:function(){
-            let page={};
-            page.title=this.$router.currentRoute.name;
-            page.path=this.$router.currentRoute.path;
-            this.$data.opened_page.push(page);
+            let is_exsited=false;
+            for(let i in this.$data.tag_page.opened_page){
+                if(this.$data.tag_page.opened_page[i].path==this.$router.currentRoute.path){
+                    is_exsited=true;
+                }
+            }
+            if(!is_exsited){
+                let page={};
+                page.title=this.$router.currentRoute.meta.title;
+                page.path=this.$router.currentRoute.path;
+                this.$data.tag_page.opened_page.push(page);
+            }
+            console.log( this.$data.tag_page.opened_page);
+        },
+        updated:function(){
+            let is_exsited=false;
+            for(let i in this.$data.tag_page.opened_page){
+                if(this.$data.tag_page.opened_page[i].path==this.$router.currentRoute.path){
+                    is_exsited=true;
+                }
+            }
+            if(!is_exsited){
+                let page={};
+                page.title=this.$router.currentRoute.meta.title;
+                page.path=this.$router.currentRoute.path;
+                this.$data.tag_page.opened_page.push(page);
+            }
+            console.log( this.$data.tag_page.opened_page);
         }
     }
 </script>
