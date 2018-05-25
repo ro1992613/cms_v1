@@ -7,7 +7,6 @@ import Util from './libs/util';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
 
-
 Vue.use(VueRouter);
 
 
