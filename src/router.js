@@ -125,6 +125,14 @@ const xinxichaxun={
             path: 'bike_info',
             name: 'bike_info',
             component:  (resolve) => require(['./views/page/xinxichaxun/bike_info.vue'], resolve)
+        },
+        {
+            meta:{
+                title:'人员信息'
+            },
+            path: 'person_info',
+            name: 'person_info',
+            component:  (resolve) => require(['./views/page/xinxichaxun/person_info.vue'], resolve)
         }
     ]
 }

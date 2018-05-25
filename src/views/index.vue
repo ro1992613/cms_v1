@@ -78,6 +78,10 @@
                         <Icon type="ios-navigate"></Icon>
                         <span class="layout-text">单车信息</span>
                     </MenuItem>
+                    <MenuItem name="/xinxichaxun/person_info">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">人员信息</span>
+                    </MenuItem>
                 </Submenu>
             </Menu>
         </Sider>
