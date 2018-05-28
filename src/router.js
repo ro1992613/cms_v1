@@ -81,6 +81,14 @@ const richangjianguan={
             path: 'complaint',
             name: 'complaint_supervise',
             component:  (resolve) => require(['./views/page/richangjianguan/complaint.vue'], resolve)
+        },
+        {
+            meta:{
+                title:'投诉监管详情'
+            },
+            path: 'complaint_more',
+            name: 'complaint_more_supervise',
+            component:  (resolve) => require(['./views/page/richangjianguan/complaint_more.vue'], resolve)
         }
     ]
 }

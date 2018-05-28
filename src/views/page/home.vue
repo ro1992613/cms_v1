@@ -73,6 +73,13 @@ export default {
         ]
       };
       chart.setOption(option);
+      chart.on('click', function (params) {//点击事件
+          if (params.componentType === 'series') {
+              var provinceName = params.name;
+              alert(provinceName);
+
+          }
+      });
     }
   },
   mounted() {

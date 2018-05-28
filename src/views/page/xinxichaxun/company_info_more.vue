@@ -2,7 +2,7 @@
 <div>
     <Row>
         <Col class="box_card">
-            <a href="#" v-on:click="goback()"><Icon type="arrow-return-left"></Icon>返回上级</a>
+            <a href="javascript:void(0);" v-on:click="goback()"><Icon type="arrow-return-left"></Icon>返回上级</a>
             <div style="height:1px;background-color: rgba(116, 116, 116, 0.63);margin-top: 10px;"></div>
         </Col>
     </Row>
