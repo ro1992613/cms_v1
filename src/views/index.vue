@@ -15,6 +15,59 @@
     <div class="layout">
         <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
             <Menu active-name="" theme="dark" width="auto" :open-names="['1']" @on-select="clickMenuItem">
+                <MenuItem name="/">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">总览</span>
+                </MenuItem>
+                <Submenu name="/richangjianguan">
+                    <template slot="title">
+                        <Icon type="ios-navigate"></Icon>
+                        日常监管
+                    </template>
+                    <!-- <MenuItem name="/richangjianguan">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">信息总览</span>
+                    </MenuItem> -->
+                    <MenuItem name="/richangjianguan/area">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">区域监管</span>
+                    </MenuItem>
+                    <!-- <MenuItem name="/richangjianguan/bike">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">车辆监管</span>
+                    </MenuItem>
+                    <MenuItem name="/richangjianguan/person">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">人员监管</span>
+                    </MenuItem> -->
+                    <MenuItem name="/richangjianguan/complaint">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">投诉监管</span>
+                    </MenuItem>
+                </Submenu>
+
+                <Submenu name="/xinxichaxun">
+                    <template slot="title">
+                        <Icon type="ios-navigate"></Icon>
+                        信息查询
+                    </template>
+                    <!-- <MenuItem name="/xinxichaxun">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">信息总览</span>
+                    </MenuItem> -->
+                    <MenuItem name="/xinxichaxun/company_info">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">企业信息</span>
+                    </MenuItem>
+                    <MenuItem name="/xinxichaxun/bike_info">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">单车信息</span>
+                    </MenuItem>
+                    <MenuItem name="/xinxichaxun/person_info">
+                        <Icon type="ios-navigate"></Icon>
+                        <span class="layout-text">人员信息</span>
+                    </MenuItem>
+                </Submenu>
                 <Submenu name="#">
                     <template slot="title">
                         <Icon type="ios-navigate"></Icon>
@@ -31,56 +84,6 @@
                     <MenuItem name="/access/permission">
                         <Icon type="ios-analytics"></Icon>
                         <span class="layout-text">权限信息管理</span>
-                    </MenuItem>
-                </Submenu>
-
-                <Submenu name="/richangjianguan">
-                    <template slot="title">
-                        <Icon type="ios-navigate"></Icon>
-                        日常监管
-                    </template>
-                    <MenuItem name="/richangjianguan">
-                        <Icon type="ios-navigate"></Icon>
-                        <span class="layout-text">信息总览</span>
-                    </MenuItem>
-                    <MenuItem name="/richangjianguan/area">
-                        <Icon type="ios-navigate"></Icon>
-                        <span class="layout-text">区域监管</span>
-                    </MenuItem>
-                    <MenuItem name="/richangjianguan/bike">
-                        <Icon type="ios-navigate"></Icon>
-                        <span class="layout-text">车辆监管</span>
-                    </MenuItem>
-                    <MenuItem name="/richangjianguan/person">
-                        <Icon type="ios-navigate"></Icon>
-                        <span class="layout-text">人员监管</span>
-                    </MenuItem>
-                    <MenuItem name="/richangjianguan/complaint">
-                        <Icon type="ios-navigate"></Icon>
-                        <span class="layout-text">投诉监管</span>
-                    </MenuItem>
-                </Submenu>
-
-                <Submenu name="/xinxichaxun">
-                    <template slot="title">
-                        <Icon type="ios-navigate"></Icon>
-                        信息查询
-                    </template>
-                    <MenuItem name="/xinxichaxun">
-                        <Icon type="ios-navigate"></Icon>
-                        <span class="layout-text">信息总览</span>
-                    </MenuItem>
-                    <MenuItem name="/xinxichaxun/company_info">
-                        <Icon type="ios-navigate"></Icon>
-                        <span class="layout-text">企业信息</span>
-                    </MenuItem>
-                    <MenuItem name="/xinxichaxun/bike_info">
-                        <Icon type="ios-navigate"></Icon>
-                        <span class="layout-text">单车信息</span>
-                    </MenuItem>
-                    <MenuItem name="/xinxichaxun/person_info">
-                        <Icon type="ios-navigate"></Icon>
-                        <span class="layout-text">人员信息</span>
                     </MenuItem>
                 </Submenu>
             </Menu>

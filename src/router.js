@@ -10,6 +10,9 @@ const otherRouter =
             title:'主页',
             path: '/',
             name: 'home',
+            meta:{
+                title:'总览'
+            },
             component:  (resolve) => require(['./views/page/home.vue'], resolve)
         }
     ]
