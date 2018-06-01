@@ -27,7 +27,7 @@ const login={
     component:  (resolve) => require(['./views/page/login/login.vue'], resolve)
 };
 
-const show_data={
+const showData={
     path: '/show_data',
     name: 'show_data',
     meta:{
@@ -197,6 +197,7 @@ const appRouter = [
 // 所有上面定义的路由都要写在下面的routers里
 const routers = [
     login,
+    showData,
     ...appRouter,
     otherRouter
 ];

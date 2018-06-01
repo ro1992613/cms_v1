@@ -363,6 +363,38 @@ export default {
         32385
       ]
     });
+    let curDate = new Date();
+    let nowDate = [
+        new Date(curDate.getTime() - 7 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        new Date(curDate.getTime() - 6 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        new Date(curDate.getTime() - 5 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        new Date(curDate.getTime() - 4 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        new Date(curDate.getTime() - 3 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        new Date(curDate.getTime() - 2 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        new Date(curDate.getTime() - 1 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        new Date().toLocaleDateString()
+    ];
+
+      var opArray = [];
+      for (var i = 23; i < 31; i++) {
+          var element = nowDate[i-23];
+          opArray.push({
+              title: { text: element + " 共享单车区域品牌分布" },
+              series: [
+                  { data: dataMap.dataMobai[i + ""] },
+                  { data: dataMap.dataOfo[i + ""] },
+                  { data: dataMap.dataEtc[i + ""] },
+                  {
+                      data: [
+                          { name: '摩拜', value: dataMap.dataMobai[i + 'sum'] },
+                          { name: 'OFO', value: dataMap.dataOfo[i + 'sum'] },
+                          { name: '其他', value: dataMap.dataEtc[i + 'sum'] }
+                      ]
+                  }
+              ]
+          }, )
+      }
+
 
     let option = {
       baseOption: {
@@ -377,16 +409,17 @@ export default {
           // controlStyle: {
           //     position: 'left'
           // },
-          data: [
-            "2018-05-23",
-            "2018-05-24",
-            "2018-05-25",
-            "2018-05-26",
-            "2018-05-27",
-            "2018-05-28",
-            "2018-05-29",
-            "2018-05-30"
-          ],
+          // data: [
+          //   "2018-05-23",
+          //   "2018-05-24",
+          //   "2018-05-25",
+          //   "2018-05-26",
+          //   "2018-05-27",
+          //   "2018-05-28",
+          //   "2018-05-29",
+          //   "2018-05-30"
+          // ],
+          data:nowDate,
           label: {
             formatter: function(s) {
               return s;
@@ -454,128 +487,129 @@ export default {
           }
         ]
       },
-      options: [
-        {
-          title: { text: "2018-05-23共享单车区域品牌分布" },
-          series: [
-            { data: dataMap.dataMobai["23"] },
-            { data: dataMap.dataOfo["23"] },
-            { data: dataMap.dataEtc["23"] },
-            {
-              data: [
-                { name: "摩拜", value: dataMap.dataMobai["23sum"] },
-                { name: "ofo", value: dataMap.dataOfo["23sum"] },
-                { name: "其它", value: dataMap.dataEtc["23sum"] }
-              ]
-            }
-          ]
-        },
-        {
-          title: { text: "2018-05-24共享单车区域品牌分布" },
-          series: [
-            { data: dataMap.dataMobai["24"] },
-            { data: dataMap.dataOfo["24"] },
-            { data: dataMap.dataEtc["24"] },
-            {
-              data: [
-                { name: "摩拜", value: dataMap.dataMobai["24sum"] },
-                { name: "ofo", value: dataMap.dataOfo["24sum"] },
-                { name: "其它", value: dataMap.dataEtc["24sum"] }
-              ]
-            }
-          ]
-        },
-        {
-          title: { text: "2018-05-25共享单车区域品牌分布" },
-          series: [
-            { data: dataMap.dataMobai["25"] },
-            { data: dataMap.dataOfo["25"] },
-            { data: dataMap.dataEtc["25"] },
-            {
-              data: [
-                { name: "摩拜", value: dataMap.dataMobai["25sum"] },
-                { name: "ofo", value: dataMap.dataOfo["25sum"] },
-                { name: "其它", value: dataMap.dataEtc["25sum"] }
-              ]
-            }
-          ]
-        },
-        {
-          title: { text: "2018-05-26共享单车区域品牌分布" },
-          series: [
-            { data: dataMap.dataMobai["26"] },
-            { data: dataMap.dataOfo["26"] },
-            { data: dataMap.dataEtc["26"] },
-            {
-              data: [
-                { name: "摩拜", value: dataMap.dataMobai["26sum"] },
-                { name: "ofo", value: dataMap.dataOfo["26sum"] },
-                { name: "其它", value: dataMap.dataEtc["26sum"] }
-              ]
-            }
-          ]
-        },
-        {
-          title: { text: "2018-05-27共享单车区域品牌分布" },
-          series: [
-            { data: dataMap.dataMobai["27"] },
-            { data: dataMap.dataOfo["27"] },
-            { data: dataMap.dataEtc["27"] },
-            {
-              data: [
-                { name: "摩拜", value: dataMap.dataMobai["27sum"] },
-                { name: "ofo", value: dataMap.dataOfo["27sum"] },
-                { name: "其它", value: dataMap.dataEtc["27sum"] }
-              ]
-            }
-          ]
-        },
-        {
-          title: { text: "2018-05-28共享单车区域品牌分布" },
-          series: [
-            { data: dataMap.dataMobai["28"] },
-            { data: dataMap.dataOfo["28"] },
-            { data: dataMap.dataEtc["28"] },
-            {
-              data: [
-                { name: "摩拜", value: dataMap.dataMobai["28sum"] },
-                { name: "ofo", value: dataMap.dataOfo["28sum"] },
-                { name: "其它", value: dataMap.dataEtc["28sum"] }
-              ]
-            }
-          ]
-        },
-        {
-          title: { text: "2018-05-29共享单车区域品牌分布" },
-          series: [
-            { data: dataMap.dataMobai["29"] },
-            { data: dataMap.dataOfo["29"] },
-            { data: dataMap.dataEtc["29"] },
-            {
-              data: [
-                { name: "摩拜", value: dataMap.dataMobai["29sum"] },
-                { name: "ofo", value: dataMap.dataOfo["29sum"] },
-                { name: "其它", value: dataMap.dataEtc["29sum"] }
-              ]
-            }
-          ]
-        },
-        {
-          title: { text: "2018-05-30共享单车区域品牌分布" },
-          series: [
-            { data: dataMap.dataMobai["30"] },
-            { data: dataMap.dataOfo["30"] },
-            { data: dataMap.dataEtc["30"] },
-            {
-              data: [
-                { name: "摩拜", value: dataMap.dataMobai["30sum"] },
-                { name: "ofo", value: dataMap.dataOfo["30sum"] },
-                { name: "其它", value: dataMap.dataEtc["30sum"] }
-              ]
-            }
-          ]
-        }
-      ]
+      // options: [
+      //   {
+      //     title: { text: "2018-05-23共享单车区域品牌分布" },
+      //     series: [
+      //       { data: dataMap.dataMobai["23"] },
+      //       { data: dataMap.dataOfo["23"] },
+      //       { data: dataMap.dataEtc["23"] },
+      //       {
+      //         data: [
+      //           { name: "摩拜", value: dataMap.dataMobai["23sum"] },
+      //           { name: "ofo", value: dataMap.dataOfo["23sum"] },
+      //           { name: "其它", value: dataMap.dataEtc["23sum"] }
+      //         ]
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     title: { text: "2018-05-24共享单车区域品牌分布" },
+      //     series: [
+      //       { data: dataMap.dataMobai["24"] },
+      //       { data: dataMap.dataOfo["24"] },
+      //       { data: dataMap.dataEtc["24"] },
+      //       {
+      //         data: [
+      //           { name: "摩拜", value: dataMap.dataMobai["24sum"] },
+      //           { name: "ofo", value: dataMap.dataOfo["24sum"] },
+      //           { name: "其它", value: dataMap.dataEtc["24sum"] }
+      //         ]
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     title: { text: "2018-05-25共享单车区域品牌分布" },
+      //     series: [
+      //       { data: dataMap.dataMobai["25"] },
+      //       { data: dataMap.dataOfo["25"] },
+      //       { data: dataMap.dataEtc["25"] },
+      //       {
+      //         data: [
+      //           { name: "摩拜", value: dataMap.dataMobai["25sum"] },
+      //           { name: "ofo", value: dataMap.dataOfo["25sum"] },
+      //           { name: "其它", value: dataMap.dataEtc["25sum"] }
+      //         ]
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     title: { text: "2018-05-26共享单车区域品牌分布" },
+      //     series: [
+      //       { data: dataMap.dataMobai["26"] },
+      //       { data: dataMap.dataOfo["26"] },
+      //       { data: dataMap.dataEtc["26"] },
+      //       {
+      //         data: [
+      //           { name: "摩拜", value: dataMap.dataMobai["26sum"] },
+      //           { name: "ofo", value: dataMap.dataOfo["26sum"] },
+      //           { name: "其它", value: dataMap.dataEtc["26sum"] }
+      //         ]
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     title: { text: "2018-05-27共享单车区域品牌分布" },
+      //     series: [
+      //       { data: dataMap.dataMobai["27"] },
+      //       { data: dataMap.dataOfo["27"] },
+      //       { data: dataMap.dataEtc["27"] },
+      //       {
+      //         data: [
+      //           { name: "摩拜", value: dataMap.dataMobai["27sum"] },
+      //           { name: "ofo", value: dataMap.dataOfo["27sum"] },
+      //           { name: "其它", value: dataMap.dataEtc["27sum"] }
+      //         ]
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     title: { text: "2018-05-28共享单车区域品牌分布" },
+      //     series: [
+      //       { data: dataMap.dataMobai["28"] },
+      //       { data: dataMap.dataOfo["28"] },
+      //       { data: dataMap.dataEtc["28"] },
+      //       {
+      //         data: [
+      //           { name: "摩拜", value: dataMap.dataMobai["28sum"] },
+      //           { name: "ofo", value: dataMap.dataOfo["28sum"] },
+      //           { name: "其它", value: dataMap.dataEtc["28sum"] }
+      //         ]
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     title: { text: "2018-05-29共享单车区域品牌分布" },
+      //     series: [
+      //       { data: dataMap.dataMobai["29"] },
+      //       { data: dataMap.dataOfo["29"] },
+      //       { data: dataMap.dataEtc["29"] },
+      //       {
+      //         data: [
+      //           { name: "摩拜", value: dataMap.dataMobai["29sum"] },
+      //           { name: "ofo", value: dataMap.dataOfo["29sum"] },
+      //           { name: "其它", value: dataMap.dataEtc["29sum"] }
+      //         ]
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     title: { text: "2018-05-30共享单车区域品牌分布" },
+      //     series: [
+      //       { data: dataMap.dataMobai["30"] },
+      //       { data: dataMap.dataOfo["30"] },
+      //       { data: dataMap.dataEtc["30"] },
+      //       {
+      //         data: [
+      //           { name: "摩拜", value: dataMap.dataMobai["30sum"] },
+      //           { name: "ofo", value: dataMap.dataOfo["30sum"] },
+      //           { name: "其它", value: dataMap.dataEtc["30sum"] }
+      //         ]
+      //       }
+      //     ]
+      //   }
+      // ],
+      options:opArray
     };
 
     if (option && typeof option === "object") {
