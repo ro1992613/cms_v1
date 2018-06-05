@@ -295,8 +295,10 @@ export default {
             };
             this.$Modal.confirm({
                 onOk:()=>{
-                    if(user.name){
+                    if(user.name && user.age>0 && user.address){
                         this.$data.user.push(user);
+                    }else{
+                        this.$Message.warning('请完整输入数据！');
                     }
                 },
                 render: (h) => {

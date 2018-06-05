@@ -4,7 +4,7 @@
         <span v-if="prop_type=='permission_path'">{{prop_value.permission_path}}</span>
         <span style="float: right;">
             <Tooltip content="编辑" placement="top">
-                <Button type="primary" size="small" @click="edit_value"><Icon type="edit"></Icon></Button>
+                <a style="color:black;float:right;" v-on:click="edit_value"><Icon type="edit"></Icon></a>
             </Tooltip>
         </span>
     </div>

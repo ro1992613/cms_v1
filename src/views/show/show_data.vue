@@ -1,14 +1,32 @@
 <template  >
     <div class="bg">
         <Row style="height: 10%;">
-            <div class="card" style="height: 80%;"></div>
+            <div class="card" style="height: 80%;text-align: center;font-size: 35px;padding-top:8px;font-weight:bold;letter-spacing:3px;">成都市共享单车监管平台</div>
         </Row>
         <Row style="height: 55%;">
-            <Col span="6" style="height: 95%;">
-                <div id="area_bike" class="card" style="height: 100%;"></div>
+            <Col span="6" style="height: 100%;">
+              <Row style="height: 20%;">
+                <Col span="12" style="height: 100%;">
+                  <div class="card" style="height: 93%;padding:5px;padding-left:10px;">
+                      <span style="font-size: 15px;line-height:15px;">投放总量:</span>
+                     <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="68789"></count-to> </span>
+                  </div>
+                </Col>
+                <Col span="12" style="height: 100%;">
+                  <div class="card" style="height: 93%;padding:5px;padding-left:10px;">
+                      <span style="font-size: 15px;line-height:15px;">骑行次数:</span>
+                     <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="4589712"></count-to> </span>
+                  </div>
+                </Col>
+              </Row>
+              <Row style="height: 80%;margin-top:4px;">
+                <div id="area_bike" class="card" style="height:93%;"></div>
+              </Row>
             </Col>
             <Col span="10"  style="height: 95%;">
-                <div class="card"  style="height: 100%;"></div>
+                <div class="card"  style="height: 100%;">
+
+                </div>
             </Col>
             <Col span="8"  style="height: 100%;">
                 <Row  style="height: 50%;">
@@ -51,7 +69,11 @@
 </template>
 <script>
 import echarts from "echarts";
+import CountTo from '../page/components/CountTo.vue';
 export default {
+  components:{
+    CountTo
+  },
   data() {
     return {
       news: [
@@ -83,12 +105,6 @@ export default {
         { area: "郫都区", mobai: 6164, ofo: 3142, etc: 7282 },
         { area: "新都区", mobai: 5864, ofo: 3042, etc: 7182 },
         { area: "青白江区", mobai: 4364, ofo: 2342, etc: 5682 }
-      ],
-      complaint_status_num: [
-        { name: "摩拜", complete: 64, complaint: 42, deal: 82 },
-        { name: "ofo", complete: 35, complaint: 62, deal: 92 },
-        { name: "小蓝", complete: 142, complaint: 172, deal: 52 },
-        { name: "etc", complete: 142, complaint: 172, deal: 52 }
       ],
       complaint_date_num: [
         { date: "2018-05-23", mobai: 64, ofo: 42, etc: 82 },
@@ -155,16 +171,24 @@ export default {
         }
       ],
       bike_num: [
-        { name: "摩拜", num: 98756 },
-        { name: "ofo", num: 55555 },
-        { name: "小蓝", num: 45360 },
-        { name: "其它", num: 58741 }
+        { name: "摩拜", num: 48756 },
+        { name: "ofo", num: 35555 },
+        { name: "青桔", num: 25360 },
+        { name: "黑拜", num: 15360 },
+        { name: "1 步", num: 5360 },
+        { name: "哈罗", num: 2360 },
+        { name: "赳赳", num: 4360 },
+        { name: "智聪", num: 1360 }
       ],
       person_num: [
-        { name: "摩拜", num: 8756 },
-        { name: "ofo", num: 5555 },
-        { name: "小蓝", num: 4360 },
-        { name: "其它", num: 5741 }
+        { name: "摩拜", num: 38756 },
+        { name: "ofo", num: 25555 },
+        { name: "青桔", num: 15360 },
+        { name: "黑拜", num: 5360 },
+        { name: "1 步", num: 4360 },
+        { name: "哈罗", num: 3060 },
+        { name: "赳赳", num: 1360 },
+        { name: "智聪", num: 2360 }
       ]
     };
   },
@@ -183,16 +207,34 @@ export default {
       let mobai_series = {
         name: "摩拜",
         type: "bar",
+        label: {
+            normal: {
+                show: true,
+                position: 'top'
+            }
+        },
         data: []
       };
       let ofo_series = {
         name: "ofo",
         type: "bar",
+        label: {
+            normal: {
+                show: true,
+                position: 'top'
+            }
+        },
         data: []
       };
       let etc_series = {
         name: "其它",
         type: "bar",
+        label: {
+            normal: {
+                show: true,
+                position: 'top'
+            }
+        },
         data: []
       };
       for (let i in data) {
@@ -203,7 +245,7 @@ export default {
       }
 
       let option = {
-        color: ["#FFFFCC", "#99CCFF", "#006699"],
+        //color: ["#FFFFCC", "#99CCFF", "#006699"],
         title: { text: "投诉事件时间分布", textStyle: { color: "#eeeeee" } },
         grid:{y2:30},
         tooltip: {
@@ -248,6 +290,12 @@ export default {
         areaStyle: {normal: {}},
         name: "摩拜",
         type: "line",
+        label: {
+            normal: {
+                show: true,
+                position: 'top'
+            }
+        },
         stack: "总量",
         data: []
       };
@@ -255,6 +303,12 @@ export default {
         areaStyle: {normal: {}},
         name: "ofo",
         type: "line",
+        label: {
+            normal: {
+                show: true,
+                position: 'top'
+            }
+        },
         stack: "总量",
         data: []
       };
@@ -262,6 +316,12 @@ export default {
         areaStyle: {normal: {}},
         name: "其它",
         type: "line",
+        label: {
+            normal: {
+                show: true,
+                position: 'top'
+            }
+        },
         stack: "总量",
         data: []
       };
@@ -318,21 +378,39 @@ export default {
         name: "摩拜",
         type: "bar",
         stack: "总量",
-        barWidth: 20,
+        label: {
+            normal: {
+                show: true,
+                position: 'insideRight'
+            }
+        },
+        barWidth: 17,
         data: []
       };
       let ofo_series = {
         name: "ofo",
         type: "bar",
         stack: "总量",
-        barWidth: 20,
+        label: {
+            normal: {
+                show: true,
+                position: 'insideRight'
+            }
+        },
+        barWidth: 17,
         data: []
       };
       let etc_series = {
         name: "其它",
         type: "bar",
         stack: "总量",
-        barWidth: 20,
+        label: {
+            normal: {
+                show: true,
+                position: 'insideRight'
+            }
+        },
+        barWidth: 17,
         data: []
       };
       for (let j in data) {
@@ -344,8 +422,8 @@ export default {
       }
 
       let option = {
-        color: ["#FFFFCC", "#99CCFF", "#006699"],
-        grid: { x: 55, x2: 20, y2: 10 },
+        //color: ["#FFFFCC", "#99CCFF", "#006699"],
+        grid: { x: 70, x2: 20,y:35, y2: 5 },
         title: {
           text: "单车区域投放数量排名",
           textStyle: { color: "#eeeeee" }
@@ -380,7 +458,7 @@ export default {
       let legend=[];
       let series = {
         type: "pie",
-        radius:"50%",
+        radius:"40%",
         data: []
       };
       for (let i in data) {
@@ -392,6 +470,7 @@ export default {
         title: { text: "车辆品牌数量分布", textStyle: { color: "#eeeeee" } },
         tooltip: {},
         legend: {
+            type: 'scroll',
             bottom: 1,
             left: 'center',
             textStyle: { color: "#eeeeee" },
@@ -424,7 +503,7 @@ export default {
       let legend=[];
       let series = {
         type: "pie",
-        radius:"50%",
+        radius:"40%",
         data: []
       };
       for (let i in data) {
@@ -436,6 +515,7 @@ export default {
         title: { text: "车辆维护人员分布", textStyle: { color: "#eeeeee" } },
         tooltip: {},
         legend: {
+            type: 'scroll',
             bottom: 1,
             left: 'center',
             textStyle: { color: "#eeeeee" },

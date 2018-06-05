@@ -184,11 +184,16 @@ export default {
             }
         },
         addRole(){
+            let date = new Date();
+            let str = date.getFullYear()+"-";
+            str += (date.getMonth() + 1)>=10?(date.getMonth() + 1):('0'+(date.getMonth() + 1)) + "-";
+            str += (date.getDate() + 1)>=10?(date.getDate() + 1):('0'+(date.getDate() + 1));
+
             let role={
                 role_name: '',
                 info: '描述',
                 state:'on',
-                create_time: ''
+                create_time: str
             };
             this.$Modal.confirm({
                 onOk:()=>{

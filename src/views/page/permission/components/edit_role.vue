@@ -1,8 +1,13 @@
 <template>
-    <Input v-model="prop_value.role_name">
-        <Icon slot="prepend" type="person"></Icon>
-        <span slot="prepend">角色</span>
-    </Input>
+    <div>
+        <Input v-model="prop_value.role_name">
+            <span slot="prepend">角色</span>
+        </Input>
+        <br>
+        <Input v-model="prop_value.info">
+            <span slot="prepend">描述</span>
+        </Input>
+    </div>
 </template>
 <script>
     export default {

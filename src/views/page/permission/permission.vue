@@ -119,12 +119,15 @@
         },
         methods: {
             addPermission:function(){
-                console.log(this.$router);
+                let date = new Date();
+                let str = date.getFullYear()+"-";
+                str += (date.getMonth() + 1)>=10?(date.getMonth() + 1):('0'+(date.getMonth() + 1)) + "-";
+                str += (date.getDate() + 1)>=10?(date.getDate() + 1):('0'+(date.getDate() + 1));
                 let prop_value={
                         permission_name: '',
                         id: null,
                         permission_path: '',
-                        create_time: ''
+                        create_time: str
                     };
                 this.$Modal.confirm({
                     onOk:()=>{
