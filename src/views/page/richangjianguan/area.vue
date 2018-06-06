@@ -27,6 +27,7 @@ export default {
         {
           id: "1",
           name: "锦江区",
+          father_area:"锦江区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -36,6 +37,7 @@ export default {
         {
           id: "2",
           name: "武侯区",
+          father_area:"武侯区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -45,6 +47,7 @@ export default {
         {
           id: "3",
           name: "成华区",
+          father_area:"成华区",
           type: "行政区域",
           important: "重要",
           tags: "禁投",
@@ -54,6 +57,7 @@ export default {
         {
           id: "4",
           name: "青羊区",
+          father_area:"青羊区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -63,6 +67,7 @@ export default {
         {
           id: "5",
           name: "金牛区",
+          father_area:"金牛区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -72,6 +77,7 @@ export default {
         {
           id: "6",
           name: "双流区",
+          father_area:"双流区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -81,6 +87,7 @@ export default {
         {
           id: "7",
           name: "龙泉驿区",
+          father_area:"龙泉驿区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -90,6 +97,7 @@ export default {
         {
           id: "8",
           name: "郫都区",
+          father_area:"郫都区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -99,6 +107,7 @@ export default {
         {
           id: "9",
           name: "温江区",
+          father_area:"温江区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -108,6 +117,7 @@ export default {
         {
           id: "10",
           name: "新都区",
+          father_area:"新都区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -117,6 +127,7 @@ export default {
         {
           id: "11",
           name: "青白江区",
+          father_area:"青白江区",
           type: "行政区域",
           important: "重要",
           tags: "禁停,禁投",
@@ -126,6 +137,7 @@ export default {
         {
           id: "12",
           name: "金融城区域",
+          father_area:"武侯区",
           type: "自定义区域",
           important: "普通",
           tags: "",
@@ -147,6 +159,7 @@ export default {
           //   });
           // }
         },
+        { title: "所属区域", key: "father_area" },
         { title: "类型", key: "type" },
         {
           title: "重点区域",

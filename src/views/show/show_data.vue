@@ -20,7 +20,7 @@
                 </Col>
               </Row>
               <Row style="height: 80%;margin-top:4px;">
-                <div id="area_bike" class="card" style="height:93%;"></div>
+                <div id="company_bike" class="card" style="height:93%;"></div>
               </Row>
             </Col>
             <Col span="10"  style="height: 95%;">
@@ -34,11 +34,11 @@
                       <div id="person_num"  style="height: 90%;" class="card"></div>
                     </Col>
                     <Col style="height: 100%;" span="12">
-                      <div id="bike_num" style="height: 90%;" class="card"></div>
+                      <div id="complaint_num" style="height: 90%;" class="card"></div>
                     </Col>
                 </Row>
                 <Row  style="height: 50%;">
-                    <div id="toufang_date_num" style="height: 90%;" class="card"></div>
+                    <div id="complaint_date_num" style="height: 90%;" class="card"></div>
                 </Row>
             </Col>
         </Row>
@@ -53,7 +53,7 @@
                   </Row>
                   <transition-group name="list" tag="p">
                       <Row  v-for="item in current_news" v-bind:key="item.id" class="item_row">
-                        <Col class="item" span="2"><Tag  color="red">{{item.type}}</Tag></Col>
+                        <Col class="item" span="2"><Tag  color="#2A8FBD">{{item.type}}</Tag></Col>
                         <Col class="item" span="3">{{item.area}}</Col>
                         <Col class="item" span="4">{{item.date}}</Col>
                         <Col class="item" span="15">{{item.info}}</Col>
@@ -62,67 +62,152 @@
                 </div>
             </Col>
             <Col style="height: 95%;" span="8">
-                <div id="complaint_date_num" style="height: 100%;" class="card"></div>
+                <div id="weihu_date_num" style="height: 100%;" class="card"></div>
             </Col>
         </Row>
     </div>
 </template>
 <script>
 import echarts from "echarts";
-import CountTo from '../page/components/CountTo.vue';
+import CountTo from "../page/components/CountTo.vue";
+
+const colorList=['#7bbfea','#2A8FBD','#4C556E','#DDF0ED','#495A80','#EEEEFF','#426ab3','#228fbd','#9999FF','#CCCCFF','#06B9D1'];
+
 export default {
-  components:{
+  components: {
     CountTo
   },
   data() {
     return {
       news: [
-        {id:"1",type:"报警",area:"青羊区",date:"2018-05-23",info:"区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！"},
-        {id:"2",type:"投诉",area:"青羊区",date:"2018-05-23",info:"ofo服务人员态度恶劣"},
-        {id:"3",type:"报警",area:"锦江区",date:"2018-05-23",info:"摩拜维护人员低于30人"},
-        {id:"4",type:"投诉",area:"金牛区",date:"2018-05-23",info:"摩拜的服务质量差"},
-        {id:"5",type:"报警",area:"成华区",date:"2018-05-23",info:"区域投放车辆超过阈值！"},
-        {id:"6",type:"警告",area:"龙泉驿区",date:"2018-05-23",info:"区域投放车辆接近阈值！"},
-        {id:"7",type:"投诉",area:"锦江区",date:"2018-05-23",info:"一步单车的坏车太多了"},
-        {id:"8",type:"投诉",area:"双流区",date:"2018-05-23",info:"机场附近的单车太多，占用人行道！"},
-        {id:"9",type:"投诉",area:"武侯区",date:"2018-05-23",info:"火车南站地铁站附近堆积了大量单车"},
-        {id:"0",type:"投诉",area:"青白江区",date:"2018-05-23",info:"单车占用人行道"},
-        {id:"11",type:"投诉",area:"青羊区",date:"2018-05-23",info:"摩拜服务人员态度差"},
-        {id:"12",type:"投诉",area:"温江区",date:"2018-05-23",info:"单车堆积"},
-        {id:"13",type:"报警",area:"温江区",date:"2018-05-23",info:"区域投放车辆超过阈值！"},
-        {id:"14",type:"报警",area:"双流区",date:"2018-05-23",info:"区域投放车辆超过阈值！"}
+        {
+          id: "1",
+          type: "报警",
+          area: "青羊区",
+          date: "2018-05-23",
+          info:
+            "区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！区域投放车辆超过阈值！"
+        },
+        {
+          id: "2",
+          type: "投诉",
+          area: "青羊区",
+          date: "2018-05-23",
+          info: "ofo服务人员态度恶劣"
+        },
+        {
+          id: "3",
+          type: "报警",
+          area: "锦江区",
+          date: "2018-05-23",
+          info: "摩拜维护人员低于30人"
+        },
+        {
+          id: "4",
+          type: "投诉",
+          area: "金牛区",
+          date: "2018-05-23",
+          info: "摩拜的服务质量差"
+        },
+        {
+          id: "5",
+          type: "报警",
+          area: "成华区",
+          date: "2018-05-23",
+          info: "区域投放车辆超过阈值！"
+        },
+        {
+          id: "6",
+          type: "警告",
+          area: "龙泉驿区",
+          date: "2018-05-23",
+          info: "区域投放车辆接近阈值！"
+        },
+        {
+          id: "7",
+          type: "投诉",
+          area: "锦江区",
+          date: "2018-05-23",
+          info: "一步单车的坏车太多了"
+        },
+        {
+          id: "8",
+          type: "投诉",
+          area: "双流区",
+          date: "2018-05-23",
+          info: "机场附近的单车太多，占用人行道！"
+        },
+        {
+          id: "9",
+          type: "投诉",
+          area: "武侯区",
+          date: "2018-05-23",
+          info: "火车南站地铁站附近堆积了大量单车"
+        },
+        {
+          id: "0",
+          type: "投诉",
+          area: "青白江区",
+          date: "2018-05-23",
+          info: "单车占用人行道"
+        },
+        {
+          id: "11",
+          type: "投诉",
+          area: "青羊区",
+          date: "2018-05-23",
+          info: "摩拜服务人员态度差"
+        },
+        {
+          id: "12",
+          type: "投诉",
+          area: "温江区",
+          date: "2018-05-23",
+          info: "单车堆积"
+        },
+        {
+          id: "13",
+          type: "报警",
+          area: "温江区",
+          date: "2018-05-23",
+          info: "区域投放车辆超过阈值！"
+        },
+        {
+          id: "14",
+          type: "报警",
+          area: "双流区",
+          date: "2018-05-23",
+          info: "区域投放车辆超过阈值！"
+        }
       ],
-      current_news:[],
-      area_bike: [
-        { area: "锦江区", mobai: 9664, ofo: 10042, etc: 15082 },
-        { area: "成华区", mobai: 9464, ofo: 8942, etc: 12082 },
-        { area: "武侯区", mobai: 8564, ofo: 8842, etc: 11182 },
-        { area: "青羊区", mobai: 8864, ofo: 8742, etc: 7882 },
-        { area: "金牛区", mobai: 8064, ofo: 7842, etc: 7682 },
-        { area: "双流区", mobai: 7564, ofo: 7642, etc: 7582 },
-        { area: "龙泉驿区", mobai: 7064, ofo: 5642, etc: 7482 },
-        { area: "温江区", mobai: 6664, ofo: 5442, etc: 7382 },
-        { area: "郫都区", mobai: 6164, ofo: 3142, etc: 7282 },
-        { area: "新都区", mobai: 5864, ofo: 3042, etc: 7182 },
-        { area: "青白江区", mobai: 4364, ofo: 2342, etc: 5682 }
+      current_news: [],
+      company_bike: [
+        { name: "摩拜", num: 48756 },
+        { name: "ofo", num: 35555 },
+        { name: "青桔", num: 25360 },
+        { name: "黑拜", num: 15360 },
+        { name: "1 步", num: 5360 },
+        { name: "哈罗", num: 4360 },
+        { name: "赳赳", num: 3360 },
+        { name: "智聪", num: 1360 }
       ],
       complaint_date_num: [
-        { date: "2018-05-23", mobai: 64, ofo: 42, etc: 82 },
-        { date: "2018-05-24", mobai: 35, ofo: 62, etc: 92 },
-        { date: "2018-05-25", mobai: 62, ofo: 92, etc: 72 },
-        { date: "2018-05-26", mobai: 142, ofo: 172, etc: 52 },
-        { date: "2018-05-27", mobai: 81, ofo: 12, etc: 32 },
-        { date: "2018-05-28", mobai: 36, ofo: 42, etc: 122 },
-        { date: "2018-05-29", mobai: 24, ofo: 52, etc: 132 }
+        { date: "2018-05-23", num: 64 },
+        { date: "2018-05-24", num: 35 },
+        { date: "2018-05-25", num: 62 },
+        { date: "2018-05-26", num: 142 },
+        { date: "2018-05-27", num: 81 },
+        { date: "2018-05-28", num: 36 },
+        { date: "2018-05-29", num: 24 }
       ],
-      toufang_date_num: [
-        { date: "2018-05-23", mobai: 64, ofo: 42, etc: 82 },
-        { date: "2018-05-24", mobai: 35, ofo: 62, etc: 92 },
-        { date: "2018-05-25", mobai: 62, ofo: 92, etc: 72 },
-        { date: "2018-05-26", mobai: 142, ofo: 172, etc: 52 },
-        { date: "2018-05-27", mobai: 81, ofo: 12, etc: 32 },
-        { date: "2018-05-28", mobai: 36, ofo: 42, etc: 122 },
-        { date: "2018-05-29", mobai: 24, ofo: 52, etc: 132 }
+      weihu_date_num: [
+        { date: "2018-05-23", fix: 64, set: 42, bad: 82 },
+        { date: "2018-05-24", fix: 35, set: 62, bad: 92 },
+        { date: "2018-05-25", fix: 62, set: 92, bad: 72 },
+        { date: "2018-05-26", fix: 142, set: 172, bad: 52 },
+        { date: "2018-05-27", fix: 81, set: 12, bad: 32 },
+        { date: "2018-05-28", fix: 36, set: 42, bad: 122 },
+        { date: "2018-05-29", fix: 24, set: 52, bad: 132 }
       ],
       bike_area_num: [
         {
@@ -170,7 +255,7 @@ export default {
           num: 2303
         }
       ],
-      bike_num: [
+      complaint_num: [
         { name: "摩拜", num: 48756 },
         { name: "ofo", num: 35555 },
         { name: "青桔", num: 25360 },
@@ -204,50 +289,46 @@ export default {
         nameTextStyle: { color: "#eeeeee" },
         axisLabel: { color: "#eeeeee" }
       };
-      let mobai_series = {
-        name: "摩拜",
+      let series = {
+        name: "数量",
         type: "bar",
+        barWidth: 30,
+        itemStyle: {
+          normal: {
+            barBorderRadius: 3,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: "#9bdffa"
+              },
+              {
+                offset: 1,
+                color: "#2A8FBD"
+              }
+            ]),
+            shadowColor: "rgba(0, 0, 0, 0.3)",
+            shadowBlur: 20
+          }
+        },
         label: {
-            normal: {
-                show: true,
-                position: 'top'
-            }
+          normal: {
+            show: true,
+            color:'#eeeeee',
+            position: "top"
+          }
         },
         data: []
       };
-      let ofo_series = {
-        name: "ofo",
-        type: "bar",
-        label: {
-            normal: {
-                show: true,
-                position: 'top'
-            }
-        },
-        data: []
-      };
-      let etc_series = {
-        name: "其它",
-        type: "bar",
-        label: {
-            normal: {
-                show: true,
-                position: 'top'
-            }
-        },
-        data: []
-      };
+
       for (let i in data) {
         xAxis.data.push(data[i].date);
-        ofo_series.data.push(data[i].ofo);
-        mobai_series.data.push(data[i].mobai);
-        etc_series.data.push(data[i].etc);
+        series.data.push(data[i].num);
       }
 
       let option = {
-        //color: ["#FFFFCC", "#99CCFF", "#006699"],
+        color: colorList,
         title: { text: "投诉事件时间分布", textStyle: { color: "#eeeeee" } },
-        grid:{y2:30},
+        grid: { y2: 30 },
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -256,11 +337,6 @@ export default {
               backgroundColor: "#6a7985"
             }
           }
-        },
-        legend: {
-          data: ["摩拜", "ofo", "其它"],
-          left: 200,
-          textStyle: { color: "#eeeeee" }
         },
         xAxis: xAxis,
         yAxis: {
@@ -271,12 +347,12 @@ export default {
           nameTextStyle: { color: "#eeeeee" },
           axisLabel: { color: "#eeeeee" }
         },
-        series: [mobai_series, ofo_series, etc_series]
+        series: [series]
       };
       myChart.setOption(option);
     },
-    create_toufang_date_num: function(data) {
-      let myChart = echarts.init(document.getElementById("toufang_date_num"));
+    create_weihu_date_num: function(data) {
+      let myChart = echarts.init(document.getElementById("weihu_date_num"));
       let xAxis = {
         name: "数量",
         type: "category",
@@ -286,56 +362,53 @@ export default {
         nameTextStyle: { color: "#eeeeee" },
         axisLabel: { color: "#eeeeee" }
       };
-      let mobai_series = {
-        areaStyle: {normal: {}},
-        name: "摩拜",
-        type: "line",
+      let fix_series = {
+        areaStyle: { normal: {} },
+        name: "维修",
+        type: "bar",
         label: {
-            normal: {
-                show: true,
-                position: 'top'
-            }
+          normal: {
+            show: true,
+            position: "top"
+          }
         },
-        stack: "总量",
         data: []
       };
-      let ofo_series = {
-        areaStyle: {normal: {}},
-        name: "ofo",
-        type: "line",
+      let set_series = {
+        areaStyle: { normal: {} },
+        name: "维修投放",
+        type: "bar",
         label: {
-            normal: {
-                show: true,
-                position: 'top'
-            }
+          normal: {
+            show: true,
+            position: "top"
+          }
         },
-        stack: "总量",
         data: []
       };
-      let etc_series = {
-        areaStyle: {normal: {}},
-        name: "其它",
-        type: "line",
+      let bad_series = {
+        areaStyle: { normal: {} },
+        name: "报废",
+        type: "bar",
         label: {
-            normal: {
-                show: true,
-                position: 'top'
-            }
+          normal: {
+            show: true,
+            position: "top"
+          }
         },
-        stack: "总量",
         data: []
       };
       for (let i in data) {
         xAxis.data.push(data[i].date);
-        ofo_series.data.push(data[i].ofo);
-        mobai_series.data.push(data[i].mobai);
-        etc_series.data.push(data[i].etc);
+        fix_series.data.push(data[i].fix);
+        set_series.data.push(data[i].set);
+        bad_series.data.push(data[i].bad);
       }
 
       let option = {
-        color: ["#FFFFCC", "#99CCFF", "#006699"],
-        title: { text: "车辆投放数量时间分布", textStyle: { color: "#eeeeee" } },
-        grid:{y2:30},
+        color: colorList,
+        title: { text: "车辆维护状态", textStyle: { color: "#eeeeee" } },
+        grid: { y2: 30 },
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -346,7 +419,7 @@ export default {
           }
         },
         legend: {
-          data: ["摩拜", "ofo", "其它"],
+          data: ["维修", "维修投放", "报废"],
           left: 200,
           textStyle: { color: "#eeeeee" }
         },
@@ -359,12 +432,12 @@ export default {
           nameTextStyle: { color: "#eeeeee" },
           axisLabel: { color: "#eeeeee" }
         },
-        series: [mobai_series, ofo_series, etc_series]
+        series: [fix_series, set_series, bad_series]
       };
       myChart.setOption(option);
     },
-    create_area_bike: function(data) {
-      let myChart = echarts.init(document.getElementById("area_bike"));
+    create_company_bike: function(data) {
+      let myChart = echarts.init(document.getElementById("company_bike"));
       let yAxis = {
         splitLine: false,
         type: "category",
@@ -374,58 +447,75 @@ export default {
         nameTextStyle: { color: "#eeeeee", width: 500 },
         axisLabel: { color: "#eeeeee" }
       };
-      let mobai_series = {
-        name: "摩拜",
-        type: "bar",
-        stack: "总量",
-        label: {
-            normal: {
-                show: true,
-                position: 'insideRight'
-            }
-        },
-        barWidth: 17,
+
+      let temp_yAxis={
+        show: false,
+        type: "category",
         data: []
       };
-      let ofo_series = {
-        name: "ofo",
+
+      let series = {
+        name: "数量",
         type: "bar",
-        stack: "总量",
-        label: {
-            normal: {
-                show: true,
-                position: 'insideRight'
-            }
+        itemStyle: {
+          normal: {
+            barBorderRadius: 5,
+            color: new echarts.graphic.LinearGradient(1, 1, 0, 0, [
+              {
+                offset: 0,
+                color: "#9bdffa"
+              },
+              {
+                offset: 1,
+                color: "#2A8FBD"
+              }
+            ]),
+            shadowColor: "rgba(0, 0, 0, 0.3)",
+            shadowBlur: 10
+          }
         },
-        barWidth: 17,
+        label: {
+          normal: {
+            show: true,
+            position: "insideLeft"
+          }
+        },
+        barWidth: 22,
         data: []
       };
-      let etc_series = {
-        name: "其它",
-        type: "bar",
-        stack: "总量",
-        label: {
-            normal: {
-                show: true,
-                position: 'insideRight'
-            }
-        },
-        barWidth: 17,
-        data: []
-      };
+
+      let max = 0;
       for (let j in data) {
         let i = data.length - j - 1;
-        yAxis.data.push(data[i].area);
-        ofo_series.data.push(data[i].ofo);
-        mobai_series.data.push(data[i].mobai);
-        etc_series.data.push(data[i].etc);
+        yAxis.data.push(data[i].name);
+        temp_yAxis.data.push(data[i].name);
+        series.data.push(data[i].num);
+        if (data[i].num > max) {
+          max = data[i].num;
+        }
       }
+      let temp_series = {
+        // 辅助系列
+        type: "bar",
+        silent: true,
+        yAxisIndex: 1,
+        itemStyle: {
+          normal: {
+            barBorderRadius: 8,
+            color: "#ddddddaa"
+          }
+        },
+        barWidth: 25,
+        data: []
+      };
 
+      for (let j in data) {
+        temp_series.data.push(max);
+      }
       let option = {
-        //color: ["#FFFFCC", "#99CCFF", "#006699"],
-        grid: { x: 70, x2: 20,y:35, y2: 5 },
+        grid: { x: 50, x2: 20, y: 35, y2: 5 },
         title: {
-          text: "单车区域投放数量排名",
+          text: "单车品牌投放数量排名",
           textStyle: { color: "#eeeeee" }
         },
         tooltip: {
@@ -448,17 +538,17 @@ export default {
           nameTextStyle: { color: "#eeeeee" },
           axisLabel: { color: "#eeeeee", rotate: 270 }
         },
-        yAxis: yAxis,
-        series: [mobai_series, ofo_series, etc_series]
+        yAxis: [yAxis,temp_yAxis],
+        series: [temp_series,series ]
       };
       myChart.setOption(option);
     },
-    create_bike_num: function(data) {
-      let myChart = echarts.init(document.getElementById("bike_num"));
-      let legend=[];
+    create_complaint_num: function(data) {
+      let myChart = echarts.init(document.getElementById("complaint_num"));
+      let legend = [];
       let series = {
         type: "pie",
-        radius:"40%",
+        radius: "40%",
         data: []
       };
       for (let i in data) {
@@ -467,14 +557,15 @@ export default {
         series.data.push(temp);
       }
       let option = {
-        title: { text: "车辆品牌数量分布", textStyle: { color: "#eeeeee" } },
+        color: colorList,
+        title: { text: "投诉品牌数量分布", textStyle: { color: "#eeeeee" } },
         tooltip: {},
         legend: {
-            type: 'scroll',
-            bottom: 1,
-            left: 'center',
-            textStyle: { color: "#eeeeee" },
-            data: legend
+          type: "scroll",
+          bottom: 1,
+          left: "center",
+          textStyle: { color: "#eeeeee" },
+          data: legend
         },
         series: [series]
       };
@@ -484,7 +575,7 @@ export default {
       let myChart = echarts.init(document.getElementById("bike_area_num"));
       let series = {
         type: "pie",
-        radius:"65%",
+        radius: "65%",
         data: []
       };
       for (let i in data) {
@@ -492,6 +583,7 @@ export default {
         series.data.push(temp);
       }
       let option = {
+        color: colorList,
         title: { text: "车辆投放区域分布", textStyle: { color: "#eeeeee" } },
         tooltip: {},
         series: [series]
@@ -500,10 +592,10 @@ export default {
     },
     create_person_num: function(data) {
       let myChart = echarts.init(document.getElementById("person_num"));
-      let legend=[];
+      let legend = [];
       let series = {
         type: "pie",
-        radius:"40%",
+        radius: "40%",
         data: []
       };
       for (let i in data) {
@@ -512,50 +604,50 @@ export default {
         series.data.push(temp);
       }
       let option = {
+        color: colorList,
         title: { text: "车辆维护人员分布", textStyle: { color: "#eeeeee" } },
         tooltip: {},
         legend: {
-            type: 'scroll',
-            bottom: 1,
-            left: 'center',
-            textStyle: { color: "#eeeeee" },
-            data: legend
+          type: "scroll",
+          bottom: 1,
+          left: "center",
+          textStyle: { color: "#eeeeee" },
+          data: legend
         },
         series: [series]
       };
       myChart.setOption(option);
     },
-    scrollNews:function(i){
-      if(this.current_news.length>8){
-        this.current_news.splice(0,1);
+    scrollNews: function(i) {
+      if (this.current_news.length > 8) {
+        this.current_news.splice(0, 1);
       }
-      while(this.current_news.length<=8){
+      while (this.current_news.length <= 8) {
         this.current_news.push(this.news[i]);
         i++;
       }
       this.current_news.push(this.news[i]);
       i++;
-      if(i>=this.news.length){
-        i=0;
+      if (i >= this.news.length) {
+        i = 0;
       }
-      let self=this;
+      let self = this;
       if (self && !self._isDestroyed) {
-          setTimeout(() => {
-              if (self && !self._isDestroyed){
-                self.scrollNews(i);
-              }
-                  
-          }, 3000);
+        setTimeout(() => {
+          if (self && !self._isDestroyed) {
+            self.scrollNews(i);
+          }
+        }, 3000);
       }
     }
   },
   mounted: function() {
-    this.create_area_bike(this.$data.area_bike);
+    this.create_company_bike(this.$data.company_bike);
     this.create_complaint_date_num(this.$data.complaint_date_num);
-    this.create_bike_num(this.$data.bike_num);
+    this.create_complaint_num(this.$data.complaint_num);
     this.create_person_num(this.$data.person_num);
     this.create_bike_area_num(this.$data.bike_area_num);
-    this.create_toufang_date_num(this.$data.toufang_date_num);
+    this.create_weihu_date_num(this.$data.weihu_date_num);
     this.scrollNews(0);
   }
 };
@@ -565,11 +657,9 @@ export default {
   display: block;
   height: 100%;
   width: 100%;
-  background: linear-gradient(
-    to bottom right,
-    rgb(0, 117, 196),
-    rgb(0, 31, 66)
-  );
+  background-image: url("/dist/data_bg.jpg");
+  background-size: cover;
+  position: relative;
   padding: 10px;
   color: #eeeeee;
 }
@@ -596,7 +686,7 @@ export default {
   background-size: 2px 20px, 20px 2px, 2px 20px, 20px 2px;
   background-color: rgba(0, 0, 0, 0.23);
 }
-.item_row{
+.item_row {
   margin: 1px;
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -608,18 +698,18 @@ export default {
 .list-enter-active {
   transition: all 1s;
 }
-.list-leave-active{
+.list-leave-active {
   transition: all 1s;
 }
-.list-enter{
+.list-enter {
   opacity: 0;
   transform: translateX(10px);
 }
-.list-leave-to{
+.list-leave-to {
   opacity: 0;
   transform: translateX(10px);
 }
-.content{
+.content {
   overflow: hidden;
 }
 </style>
