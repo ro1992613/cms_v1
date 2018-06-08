@@ -7,47 +7,47 @@
             <Col span="6" style="height: 100%;">
               <Row style="height: 20%;">
                 <Col span="12" style="height: 100%;">
-                  <div class="card" style="height: 93%;padding:5px;padding-left:10px;">
+                  <div v-on:click="showTotalData()" class="card" style="height: 93%;padding:5px;padding-left:10px;">
                       <span style="font-size: 15px;line-height:15px;">投放总量:</span>
                      <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="68789"></count-to> </span>
                   </div>
                 </Col>
                 <Col span="12" style="height: 100%;">
-                  <div class="card" style="height: 93%;padding:5px;padding-left:10px;">
+                  <div v-on:click="showTotalData()" class="card" style="height: 93%;padding:5px;padding-left:10px;">
                       <span style="font-size: 15px;line-height:15px;">骑行次数:</span>
                      <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="4589712"></count-to> </span>
                   </div>
                 </Col>
               </Row>
               <Row style="height: 80%;margin-top:4px;">
-                <div id="company_bike" class="card" style="height:93%;"></div>
+                <div  v-on:click="showTotalData()" id="company_bike" class="card" style="height:93%;"></div>
               </Row>
             </Col>
             <Col span="10"  style="height: 95%;">
-                <div class="card"  style="height: 100%;">
-
+                <div v-on:click="showBackground()" class="card"  style="height: 100%;">
+                  <my-map></my-map>
                 </div>
             </Col>
             <Col span="8"  style="height: 100%;">
                 <Row  style="height: 50%;">
                     <Col style="height: 100%;" span="12">
-                      <div id="person_num"  style="height: 90%;" class="card"></div>
+                      <div v-on:click="showWeihuData()" id="person_num"  style="height: 90%;" class="card"></div>
                     </Col>
                     <Col style="height: 100%;" span="12">
-                      <div id="complaint_num" style="height: 90%;" class="card"></div>
+                      <div v-on:click="showWeihuData()" id="complaint_num" style="height: 90%;" class="card"></div>
                     </Col>
                 </Row>
                 <Row  style="height: 50%;">
-                    <div id="complaint_date_num" style="height: 90%;" class="card"></div>
+                    <div v-on:click="showWeihuData()" id="complaint_date_num" style="height: 90%;" class="card"></div>
                 </Row>
             </Col>
         </Row>
         <Row style="height: 35%;">
             <Col style="height: 95%;" span="6">
-                <div id="bike_area_num" class="card" style="height: 100%;"></div>
+                <div v-on:click="showTotalData()" id="bike_area_num" class="card" style="height: 100%;"></div>
             </Col>
             <Col style="height: 95%;" span="10">
-                <div class="card content" style="height: 100%;">
+                <div v-on:click="showBackground()" class="card content" style="height: 100%;">
                   <Row>
                     <h2>实时消息推送</h2>
                   </Row>
@@ -62,20 +62,22 @@
                 </div>
             </Col>
             <Col style="height: 95%;" span="8">
-                <div id="weihu_date_num" style="height: 100%;" class="card"></div>
+                <div v-on:click="showWeihuData()" id="weihu_date_num" style="height: 100%;" class="card"></div>
             </Col>
         </Row>
     </div>
 </template>
 <script>
 import echarts from "echarts";
+import myMap from "./map.vue";
 import CountTo from "../page/components/CountTo.vue";
 
 const colorList=['#7bbfea','#2A8FBD','#4C556E','#DDF0ED','#495A80','#EEEEFF','#426ab3','#228fbd','#9999FF','#CCCCFF','#06B9D1'];
 
 export default {
   components: {
-    CountTo
+    CountTo,
+    myMap
   },
   data() {
     return {
@@ -278,6 +280,15 @@ export default {
     };
   },
   methods: {
+    showTotalData:function(){
+      this.$router.push("/show_data_total");
+    },
+    showWeihuData:function(){
+      this.$router.push("/show_data_weihu");
+    },
+    showBackground:function(){
+      this.$router.push("/");
+    },
     create_complaint_date_num: function(data) {
       let myChart = echarts.init(document.getElementById("complaint_date_num"));
       let xAxis = {
@@ -529,7 +540,7 @@ export default {
         },
         xAxis: {
           show: false,
-          name: "地区",
+          name: "品牌",
           nameRotate: 270,
           type: "value",
           axisLine: { lineStyle: { color: "#eeeeee" } },

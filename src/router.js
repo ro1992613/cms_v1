@@ -31,9 +31,34 @@ const showData={
     path: '/show_data',
     name: 'show_data',
     meta:{
-        title: 'xxx系统'
+        title: '共享单车监管平台'
     },
     component:  (resolve) => require(['./views/show/show_data.vue'], resolve)
+};
+
+const showDataTotal={
+    path: '/show_data_total',
+    name: 'show_data_total',
+    meta:{
+        title: '数据详情'
+    },
+    component:  (resolve) => require(['./views/show/show_data_total.vue'], resolve)
+};
+const map={
+    path: '/map',
+    name: 'map',
+    meta:{
+        title: '数据详情'
+    },
+    component:  (resolve) => require(['./views/show/map.vue'], resolve)
+};
+const showDataWeihu={
+    path: '/show_data_weihu',
+    name: 'show_data_weihu',
+    meta:{
+        title: '维护现状'
+    },
+    component:  (resolve) => require(['./views/show/show_data_weihu.vue'], resolve)
 };
 
 const richangjianguan={
@@ -198,6 +223,9 @@ const appRouter = [
 const routers = [
     login,
     showData,
+    map,
+    showDataTotal,
+    showDataWeihu,
     ...appRouter,
     otherRouter
 ];

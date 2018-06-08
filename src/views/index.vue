@@ -93,7 +93,8 @@
                 <span style="float:left;">
                     <h1><Icon type="android-bicycle"></Icon> 共享单车监管平台</h1>
                 </span>
-                <span style="float:right;"> <router-link to="/login"><Icon type="log-out"></Icon> 注销</router-link></span>
+                <span style="float:right;width:100px;"> <router-link to="/login"><Icon type="log-out"></Icon> 注销</router-link></span>
+                <span style="float:right;width:100px;"> <router-link to="/show_data"><Icon type="easel"></Icon> 数据展示</router-link></span>
             </Header>
             <Content :style="{padding: '0 16px 16px'}">
                 <Breadcrumb :style="{margin: '16px 0'}">
