@@ -95,6 +95,14 @@ const richangjianguan={
             component:  (resolve) => require(['./views/page/richangjianguan/area.vue'], resolve)
         },
         {
+            path: 'addRegion',
+            name: 'addRegion',
+            meta:{
+                title: '区域编辑'
+            },
+            component:  (resolve) => require(['./views/page/richangjianguan/addRegion/area_add_region.vue'], resolve)
+        },
+        {
             meta:{
                 title:'人员监管'
             },

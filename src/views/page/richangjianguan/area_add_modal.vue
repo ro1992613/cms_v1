@@ -9,6 +9,21 @@
             <span slot="prepend">名称</span>
         </Input>
         <br>
+        <Select v-model="current_data.father_area" label="所属区域" >
+            <Option value="锦江区" key="锦江区">锦江区</Option>
+            <Option value="成华区" key="成华区">成华区</Option>
+            <Option value="武侯区" key="武侯区">武侯区</Option>
+            <Option value="金牛区" key="金牛区">金牛区</Option>
+            <Option value="青羊区" key="青羊区">青羊区</Option>
+            <Option value="双流区" key="双流区">双流区</Option>
+            <Option value="龙泉驿区" key="龙泉驿区">龙泉驿区</Option>
+            <Option value="郫都区" key="郫都区">郫都区</Option>
+            <Option value="温江区" key="温江区">温江区</Option>
+            <Option value="新都区" key="新都区">新都区</Option>
+            <Option value="青白江区" key="青白江区">青白江区</Option>
+        </Select>
+        <br>
+        <br>
         <Select v-model="current_data.important" label="重点区域" >
             <Option value="重要" key="重要">重要</Option>
             <Option value="普通" key="普通">普通</Option>
