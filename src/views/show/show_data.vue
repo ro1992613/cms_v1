@@ -9,13 +9,13 @@
                 <Col span="12" style="height: 100%;">
                   <div v-on:click="showTotalData()" class="card" style="height: 93%;padding:5px;padding-left:10px;">
                       <span style="font-size: 15px;line-height:15px;">投放总量:</span>
-                     <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="68789"></count-to> </span>
+                     <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="1802770"></count-to> </span>
                   </div>
                 </Col>
                 <Col span="12" style="height: 100%;">
                   <div v-on:click="showTotalData()" class="card" style="height: 93%;padding:5px;padding-left:10px;">
                       <span style="font-size: 15px;line-height:15px;">骑行次数:</span>
-                     <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="4589712"></count-to> </span>
+                     <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="3125787"></count-to> </span>
                   </div>
                 </Col>
               </Row>
@@ -24,7 +24,8 @@
               </Row>
             </Col>
             <Col span="10"  style="height: 95%;">
-                <div v-on:click="" class="card"  style="height: 100%;">
+                <div v-on:click="
+                " class="card"  style="height: 100%;">
                   <my-map></my-map>
                 </div>
             </Col>
@@ -184,14 +185,15 @@ export default {
       ],
       current_news: [],
       company_bike: [
-        { name: "摩拜", num: 48756 },
-        { name: "ofo", num: 35555 },
-        { name: "青桔", num: 25360 },
+        
+        { name: "ofo", num: 835854 },
+        { name: "摩拜", num: 448756 },
+        { name: "哈罗", num: 355360 },
+        { name: "青桔", num: 55360 },
+        { name: "1 步", num: 45360 },
+        { name: "赳赳", num: 35360 },
         { name: "黑拜", num: 15360 },
-        { name: "1 步", num: 5360 },
-        { name: "哈罗", num: 4360 },
-        { name: "赳赳", num: 3360 },
-        { name: "智聪", num: 1360 }
+        { name: "智聪", num: 11360 }
       ],
       complaint_date_num: [
         { date: "2018-05-23", num: 64 },
@@ -200,7 +202,7 @@ export default {
         { date: "2018-05-26", num: 142 },
         { date: "2018-05-27", num: 81 },
         { date: "2018-05-28", num: 36 },
-        { date: "2018-05-29", num: 24 }
+        { date: "2018-05-29", num: 154 }
       ],
       weihu_date_num: [
         { date: "2018-05-23", fix: 64, set: 42, bad: 82 },
@@ -214,68 +216,68 @@ export default {
       bike_area_num: [
         {
           area: "青羊区",
-          num: 3100
+          num: 201145
         },
         {
           area: "武侯区",
-          num: 4005
+          num: 365543
         },
         {
           area: "金牛区",
-          num: 12509
+          num: 112509
         },
         {
           area: "锦江区",
-          num: 11115
+          num: 301587
         },
         {
           area: "成华区",
-          num: 14210
+          num: 139836
         },
         {
           area: "双流区",
-          num: 23520
+          num: 89754
         },
         {
           area: "龙泉驿区",
-          num: 15130
+          num: 315130
         },
         {
           area: "郫都区",
-          num: 14330
+          num: 74330
         },
         {
           area: "温江区",
-          num: 6303
+          num: 66303
         },
         {
           area: "青白江区",
-          num: 14330
+          num: 54330
         },
         {
           area: "新都区",
-          num: 2303
+          num: 82303
         }
       ],
       complaint_num: [
-        { name: "摩拜", num: 48756 },
-        { name: "ofo", num: 35555 },
-        { name: "青桔", num: 25360 },
-        { name: "黑拜", num: 15360 },
-        { name: "1 步", num: 5360 },
-        { name: "哈罗", num: 2360 },
-        { name: "赳赳", num: 4360 },
-        { name: "智聪", num: 1360 }
+        { name: "摩拜", num: 50 },
+        { name: "ofo", num: 36 },
+        { name: "青桔", num: 14 },
+        { name: "黑拜", num: 15 },
+        { name: "1 步", num: 15 },
+        { name: "哈罗", num: 13 },
+        { name: "赳赳", num: 12 },
+        { name: "智聪", num: 9 }
       ],
       person_num: [
-        { name: "摩拜", num: 38756 },
-        { name: "ofo", num: 25555 },
-        { name: "青桔", num: 15360 },
-        { name: "黑拜", num: 5360 },
-        { name: "1 步", num: 4360 },
-        { name: "哈罗", num: 3060 },
-        { name: "赳赳", num: 1360 },
-        { name: "智聪", num: 2360 }
+        { name: "摩拜", num: 287 },
+        { name: "ofo", num: 315 },
+        { name: "青桔", num: 54 },
+        { name: "黑拜", num: 15 },
+        { name: "1 步", num: 68 },
+        { name: "哈罗", num: 114 },
+        { name: "赳赳", num: 20 },
+        { name: "智聪", num: 23 }
       ]
     };
   },

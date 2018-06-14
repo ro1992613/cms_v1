@@ -7,7 +7,7 @@
                         <div v-on:click="showBackground()" style="height:100%;text-align: center;">
                             <span style="font-size: 25px;color:#bbb;"><Tag  color="#7bbfea"></Tag> 投放总量</span>
                             <span style="font-size: 50px;color:rgb(180, 255, 255);font-weight:bold;">
-                                <count-to :end-val="19555555"></count-to>
+                                <count-to :end-val="1802770"></count-to>
                             </span>
                         </div>
                     </Col>
@@ -15,7 +15,7 @@
                         <div v-on:click="showBackground()" style="height:100%;text-align: center;">
                             <span style="font-size: 25px;color:#bbb;"><Tag  color="#2A8FBD"></Tag> 骑行总量</span>
                             <span style="font-size: 50px;color:rgb(180, 255, 255);font-weight:bold;">
-                                <count-to :end-val="789555555"></count-to>
+                                <count-to :end-val="937640254"></count-to>
                             </span>
                         </div>
                     </Col>
@@ -23,7 +23,7 @@
                         <div v-on:click="showBackground()" style="height:100%;text-align: center;">
                             <span style="font-size: 25px;color:#bbb;"><Tag  color="#4C556E"></Tag> 日活跃车辆</span>
                             <span style="font-size: 50px;color:rgb(180, 255, 255);font-weight:bold;">
-                                <count-to :end-val="16552585"></count-to>
+                                <count-to :end-val="678024"></count-to>
                             </span>
                         </div>
                     </Col>
@@ -81,80 +81,80 @@ export default {
   data() {
     return {
       bike_date_num: [
-        { date: "2018-05-23", num: 766664 },
-        { date: "2018-05-24", num: 776664 },
-        { date: "2018-05-25", num: 786664 },
-        { date: "2018-05-26", num: 796664 },
-        { date: "2018-05-27", num: 866664 },
-        { date: "2018-05-28", num: 966664 },
-        { date: "2018-05-29", num: 1066664 },
-        { date: "2018-05-30", num: 1066664 }
+        { date: "2018-05-23", num: 1532550 },
+        { date: "2018-05-24", num: 1622550 },
+        { date: "2018-05-25", num: 1632550 },
+        { date: "2018-05-26", num: 1722550 },
+        { date: "2018-05-27", num: 1731550 },
+        { date: "2018-05-28", num: 1732550 },
+        { date: "2018-05-29", num: 1762770 },
+        { date: "2018-05-30", num: 1802770 }
       ],
       bike_area_num: [
         {
           area: "青羊区",
-          num: 123100
+          num: 201145
         },
         {
           area: "武侯区",
-          num: 114005
+          num: 365543
         },
         {
           area: "金牛区",
-          num: 102509
+          num: 112509
         },
         {
           area: "锦江区",
-          num: 101115
+          num: 301587
         },
         {
           area: "成华区",
-          num: 100210
+          num: 139836
         },
         {
           area: "双流区",
-          num: 83520
+          num: 89754
         },
         {
           area: "龙泉驿区",
-          num: 75130
+          num: 315130
         },
         {
           area: "郫都区",
-          num: 64330
+          num: 74330
         },
         {
           area: "温江区",
-          num: 56303
+          num: 66303
         },
         {
           area: "青白江区",
-          num: 44330
+          num: 54330
         },
         {
           area: "新都区",
-          num: 32303
+          num: 82303
         }
       ],
       bike_company_num: [
-        { name: "摩拜", num: 48756 },
-        { name: "ofo", num: 35555 },
-        { name: "青桔", num: 25360 },
+        { name: "ofo", num: 835854 },
+        { name: "摩拜", num: 448756 },
+        { name: "哈罗", num: 355360 },
+        { name: "青桔", num: 55360 },
+        { name: "1 步", num: 45360 },
+        { name: "赳赳", num: 35360 },
         { name: "黑拜", num: 15360 },
-        { name: "1 步", num: 5360 },
-        { name: "哈罗", num: 4360 },
-        { name: "赳赳", num: 3360 },
-        { name: "智聪", num: 1360 }
+        { name: "智聪", num: 11360 }
       ],
       bike_limit_num: [
-        { name: "摩拜", num: 418756,limit:1000000 },
-        { name: "ofo", num: 315555 ,limit:1000000 },
-        { name: "青桔", num: 215360 ,limit:500000 },
-        { name: "黑拜", num: 115360 ,limit:400000 },
-        { name: "1 步", num: 15360 ,limit:400000 },
-        { name: "哈罗", num: 34360 ,limit:400000 },
-        { name: "赳赳", num: 23360 ,limit:300000 },
-        { name: "智聪", num: 21360 ,limit:300000 }
+        { name: "ofo", num: 835854,limit:1000000 },
+        { name: "摩拜", num: 448756 ,limit:1000000},
+        { name: "哈罗", num: 355360,limit:500000 },
+        { name: "青桔", num: 55360,limit:500000 },
+        { name: "1 步", num: 45360 ,limit:100000},
+        { name: "赳赳", num: 35360,limit:100000 },
+        { name: "黑拜", num: 15360 ,limit:100000},
+        { name: "智聪", num: 11360,limit:100000 }
       ]
     };
   },

@@ -7,7 +7,7 @@
                         <div v-on:click="showBackground()" style="height:100%;text-align: center;">
                             <span style="font-size: 25px;color:#bbb;"><Tag  color="#7bbfea"></Tag> 维修总量</span>
                             <span style="font-size: 50px;color:rgb(180, 255, 255);font-weight:bold;">
-                                <count-to :end-val="95555"></count-to>
+                                <count-to :end-val="536481"></count-to>
                             </span>
                         </div>
                     </Col>
@@ -15,15 +15,15 @@
                         <div v-on:click="showBackground()" style="height:100%;text-align: center;">
                             <span style="font-size: 25px;color:#bbb;"><Tag  color="#2A8FBD"></Tag> 报废总量</span>
                             <span style="font-size: 50px;color:rgb(180, 255, 255);font-weight:bold;">
-                                <count-to :end-val="75125"></count-to>
+                                <count-to :end-val="15125"></count-to>
                             </span>
                         </div>
                     </Col>
                     <Col span="6" style="height:100%">
                         <div v-on:click="showBackground()" style="height:100%;text-align: center;">
-                            <span style="font-size: 25px;color:#bbb;"><Tag  color="#4C556E"></Tag> 调度架次</span>
+                            <span style="font-size: 25px;color:#bbb;"><Tag  color="#4C556E"></Tag> 维护人员</span>
                             <span style="font-size: 50px;color:rgb(180, 255, 255);font-weight:bold;">
-                                <count-to :end-val="239214"></count-to>
+                                <count-to :end-val="906"></count-to>
                             </span>
                         </div>
                     </Col>
@@ -80,181 +80,181 @@ export default {
       complaint_company_date_num: [
         {
           date: "2018-05-23",
-          mobai: 604,
-          ofo: 634,
-          qingju: 124,
-          heibai: 165,
-          yibu: 54,
-          hello: 218,
+          mobai: 15,
+          ofo: 31,
+          qingju: 24,
+          heibai: 5,
+          yibu: 4,
+          hello: 8,
           jiujiu: 14,
-          zhicong: 114
+          zhicong: 0
         },
         {
           date: "2018-05-24",
-          mobai: 654,
-          ofo: 544,
-          qingju: 144,
-          heibai: 215,
-          yibu: 154,
-          hello: 108,
-          jiujiu: 114,
-          zhicong: 94
+          mobai: 34,
+          ofo: 54,
+          qingju: 4,
+          heibai: 5,
+          yibu: 14,
+          hello: 10,
+          jiujiu: 11,
+          zhicong: 9
         },
         {
           date: "2018-05-25",
-          mobai: 504,
-          ofo: 344,
-          qingju: 524,
-          heibai: 435,
-          yibu: 134,
-          hello: 198,
-          jiujiu: 44,
-          zhicong: 74
+          mobai: 54,
+          ofo: 34,
+          qingju: 54,
+          heibai: 5,
+          yibu: 13,
+          hello: 18,
+          jiujiu: 4,
+          zhicong: 4
         },
         {
           date: "2018-05-26",
-          mobai: 304,
-          ofo: 234,
-          qingju: 564,
-          heibai: 155,
-          yibu: 154,
-          hello: 158,
-          jiujiu: 74,
-          zhicong: 24
+          mobai: 30,
+          ofo: 23,
+          qingju: 24,
+          heibai: 15,
+          yibu: 14,
+          hello: 15,
+          jiujiu: 4,
+          zhicong: 7
         },
         {
           date: "2018-05-27",
-          mobai: 664,
-          ofo: 584,
-          qingju: 214,
-          heibai: 155,
-          yibu: 114,
-          hello: 128,
-          jiujiu: 94,
-          zhicong: 74
+          mobai: 24,
+          ofo: 34,
+          qingju: 14,
+          heibai: 15,
+          yibu: 11,
+          hello: 12,
+          jiujiu: 0,
+          zhicong: 14
         },
         {
           date: "2018-05-28",
           mobai: 104,
-          ofo: 564,
-          qingju: 224,
-          heibai: 215,
-          yibu: 164,
-          hello: 168,
-          jiujiu: 14,
-          zhicong: 34
+          ofo: 54,
+          qingju: 24,
+          heibai: 15,
+          yibu: 64,
+          hello: 18,
+          jiujiu: 1,
+          zhicong: 3
         },
         {
           date: "2018-05-29",
-          mobai: 404,
-          ofo: 544,
-          qingju: 144,
-          heibai: 125,
-          yibu: 174,
-          hello: 118,
-          jiujiu: 214,
-          zhicong: 34
+          mobai: 40,
+          ofo: 44,
+          qingju: 14,
+          heibai: 15,
+          yibu: 14,
+          hello: 18,
+          jiujiu: 24,
+          zhicong: 3
         },
         {
           date: "2018-05-30",
-          mobai: 304,
-          ofo: 364,
-          qingju: 114,
-          heibai: 105,
-          yibu: 144,
-          hello: 18,
-          jiujiu: 94,
-          zhicong: 134
+          mobai: 30,
+          ofo: 34,
+          qingju: 14,
+          heibai: 15,
+          yibu: 14,
+          hello: 1,
+          jiujiu: 9,
+          zhicong: 3
         }
       ],
       weixiu_company_date_num: [
         {
           date: "2018-05-23",
-          mobai: 604,
-          ofo: 634,
-          qingju: 124,
-          heibai: 165,
-          yibu: 54,
-          hello: 218,
+          mobai: 15,
+          ofo: 31,
+          qingju: 24,
+          heibai: 5,
+          yibu: 4,
+          hello: 8,
           jiujiu: 14,
-          zhicong: 114
+          zhicong: 0
         },
         {
           date: "2018-05-24",
-          mobai: 654,
-          ofo: 544,
-          qingju: 144,
-          heibai: 215,
-          yibu: 154,
-          hello: 108,
-          jiujiu: 114,
-          zhicong: 94
+          mobai: 34,
+          ofo: 54,
+          qingju: 4,
+          heibai: 5,
+          yibu: 14,
+          hello: 10,
+          jiujiu: 11,
+          zhicong: 9
         },
         {
           date: "2018-05-25",
-          mobai: 504,
-          ofo: 344,
-          qingju: 524,
-          heibai: 435,
-          yibu: 134,
-          hello: 198,
-          jiujiu: 44,
-          zhicong: 74
+          mobai: 54,
+          ofo: 34,
+          qingju: 54,
+          heibai: 5,
+          yibu: 13,
+          hello: 18,
+          jiujiu: 4,
+          zhicong: 4
         },
         {
           date: "2018-05-26",
-          mobai: 304,
-          ofo: 234,
-          qingju: 564,
-          heibai: 155,
-          yibu: 154,
-          hello: 158,
-          jiujiu: 74,
-          zhicong: 24
+          mobai: 30,
+          ofo: 23,
+          qingju: 24,
+          heibai: 15,
+          yibu: 14,
+          hello: 15,
+          jiujiu: 4,
+          zhicong: 7
         },
         {
           date: "2018-05-27",
-          mobai: 664,
-          ofo: 584,
-          qingju: 214,
-          heibai: 155,
-          yibu: 114,
-          hello: 128,
-          jiujiu: 94,
-          zhicong: 74
+          mobai: 24,
+          ofo: 34,
+          qingju: 14,
+          heibai: 15,
+          yibu: 11,
+          hello: 12,
+          jiujiu: 0,
+          zhicong: 14
         },
         {
           date: "2018-05-28",
           mobai: 104,
-          ofo: 564,
-          qingju: 224,
-          heibai: 215,
-          yibu: 164,
-          hello: 168,
-          jiujiu: 14,
-          zhicong: 34
+          ofo: 54,
+          qingju: 24,
+          heibai: 15,
+          yibu: 64,
+          hello: 18,
+          jiujiu: 1,
+          zhicong: 3
         },
         {
           date: "2018-05-29",
-          mobai: 404,
-          ofo: 544,
-          qingju: 144,
-          heibai: 125,
-          yibu: 174,
-          hello: 118,
-          jiujiu: 214,
-          zhicong: 34
+          mobai: 40,
+          ofo: 44,
+          qingju: 14,
+          heibai: 15,
+          yibu: 14,
+          hello: 18,
+          jiujiu: 24,
+          zhicong: 3
         },
         {
           date: "2018-05-30",
-          mobai: 304,
-          ofo: 364,
-          qingju: 114,
-          heibai: 105,
-          yibu: 144,
-          hello: 18,
-          jiujiu: 94,
-          zhicong: 134
+          mobai: 30,
+          ofo: 34,
+          qingju: 14,
+          heibai: 15,
+          yibu: 14,
+          hello: 1,
+          jiujiu: 9,
+          zhicong: 3
         }
       ],
       diaodu_company_date_num: [

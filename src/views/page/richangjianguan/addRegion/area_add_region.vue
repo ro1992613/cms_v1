@@ -138,11 +138,11 @@ function draw(data) {
   for (let i = 0; i < ds.length; i++) {
     let element = ds[i];
     var styleOptions = {
-      strokeColor: "red", //边线颜色。
-      fillColor: "red", //填充颜色。当参数为空时，圆形将没有填充效果。
+      strokeColor: "blue", //边线颜色。
+      fillColor: "white", //填充颜色。当参数为空时，圆形将没有填充效果。
       strokeWeight: 1, //边线的宽度，以像素为单位。
       strokeOpacity: 0.8, //边线透明度，取值范围0 - 1。
-      fillOpacity: 0.6, //填充的透明度，取值范围0 - 1。
+      fillOpacity: 0.5, //填充的透明度，取值范围0 - 1。
       strokeStyle: "solid" //边线的样式，solid或dashed。
     };
     var polygon = new BMap.Polygon(element, styleOptions);
@@ -160,33 +160,34 @@ export default {
   methods: {
     save: function() {
       var isedit = this.$route.query.isedit;
-      if(isedit){
+      if (isedit) {
         var d = this;
-      var coords = points;
-      var id = d.$route.query.id;
-      let params = new URLSearchParams();
-      params.append("areaCoordinate", coords);
-      params.append("id", id);
-      d.$ajax({
-        method: "post",
-        url: d.$uri + "mapInterface/updateAreaCoordinate",
-        data: params
-      })
-        .then(function(res) {
-          d.$Message.success("编辑成功");
-          clearAll();
-          d.$router.push("/richangjianguan/area");
-        })
-        .catch(function(err) {
-          d.$Message.warning("保存失败");
-          console.log(err);
-          clearAll();
-          d.$router.push("/richangjianguan/area");
-        });
-      }else{
+        var coords = points;
+        var id = d.$route.query.id;
+        let params = new URLSearchParams();
+        params.append("areaCoordinate", coords);
+        params.append("id", id);
+        d
+          .$ajax({
+            method: "post",
+            url: d.$uri + "mapInterface/updateAreaCoordinate",
+            data: params
+          })
+          .then(function(res) {
+            d.$Message.success("编辑成功");
+            clearAll();
+            d.$router.push("/richangjianguan/area");
+          })
+          .catch(function(err) {
+            d.$Message.warning("保存失败");
+            console.log(err);
+            clearAll();
+            d.$router.push("/richangjianguan/area");
+          });
+      } else {
+        var d = this;
         d.$Message.warning("不能编辑行政区域");
       }
-      
     },
     goback: function() {
       clearAll();
@@ -204,11 +205,11 @@ export default {
     markmap.setMapStyle({ style: "grassgreen" });
 
     var styleOptions = {
-      strokeColor: "red", //边线颜色。
+      strokeColor: "blue", //边线颜色。
       fillColor: "red", //填充颜色。当参数为空时，圆形将没有填充效果。
       strokeWeight: 1, //边线的宽度，以像素为单位。
       strokeOpacity: 0.8, //边线透明度，取值范围0 - 1。
-      fillOpacity: 0.6, //填充的透明度，取值范围0 - 1。
+      fillOpacity: 0.1, //填充的透明度，取值范围0 - 1。
       strokeStyle: "solid" //边线的样式，solid或dashed。
     };
 
@@ -238,9 +239,8 @@ export default {
 
     drawingManager.addEventListener("polygoncomplete", function(e) {
       var coordlist = e.getPath();
-      var strCoords='';
+      var strCoords = "";
       if (points) {
-        
         for (var i = 0; i < coordlist.length; i++) {
           var _lat = coordlist[i].lat;
           var _lng = coordlist[i].lng;

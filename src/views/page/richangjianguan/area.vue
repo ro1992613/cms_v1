@@ -39,14 +39,14 @@ import area_add_modal from "./area_add_modal.vue";
 export default {
   data() {
     return {
-      selected_area_id:'',
+      selected_area_id: "",
       pageSize: 20,
       pageCount: 100,
       pageCurrent: 1,
       areaList: [],
       areas: [],
       areas_column: [
-        { title: "编号", key: "areaNumber", width: 80 },
+        { title: "编号", key: "areaNumber", width: 150 },
         {
           title: "名称",
           key: "name"
@@ -212,12 +212,12 @@ export default {
                       if (params.row.type == "行政区域") {
                         this.$router.push({
                           path: "/richangjianguan/addRegion",
-                          query: { id: params.row.id, isedit:0}
+                          query: { id: params.row.id, isedit: 0 }
                         });
                       } else {
                         this.$router.push({
                           path: "/richangjianguan/addRegion",
-                          query: { id: params.row.id, isedit:1}
+                          query: { id: params.row.id, isedit: 1 }
                         });
                       }
                     }
@@ -237,10 +237,23 @@ export default {
                   },
                   on: {
                     click: () => {
+                      var d=this;
                       if (params.row.type == "行政区域") {
-                        this.$Message.warning("不能删除行政区域");
+                        d.$Message.warning("不能删除行政区域");
                       } else {
-                        this.$data.areas.splice(params.index, 1);
+                        let param = new URLSearchParams();
+                        param.append("id", params.row.id);
+                        d.$ajax({
+                          method: "post",
+                          url: d.$uri + "mapInterface/deleteArea",
+                          data: param
+                        })
+                          .then(function(res) {
+                            d.get_area_date();
+                          })
+                          .catch(function(err) {
+                            console.log(err);
+                          });
                       }
                     }
                   }
@@ -276,6 +289,10 @@ export default {
             value: "6941139967a311e8a93e1843420641b8",
             label: "成都市"
           });
+          res.data.rows.splice(0, 0, {
+            value: "",
+            label: "全部"
+          });
           d.$data.areaList = res.data.rows;
         })
         .catch(function(err) {
@@ -283,7 +300,7 @@ export default {
         });
     },
     add_area: function() {
-      var d=this;
+      var d = this;
       let area = {
         id: "",
         tags: "",
@@ -299,22 +316,19 @@ export default {
           area.tags = area.tags.join();
           d.$data.areas.push(area);
           let params = new URLSearchParams();
-            params.append(
-              "param",
-              JSON.stringify(area)
-            );
-          d.$ajax({
-            method: "post",
-            url: d.$uri + "mapInterface/addArea",
-            data: params
-          })
+          params.append("param", JSON.stringify(area));
+          d
+            .$ajax({
+              method: "post",
+              url: d.$uri + "mapInterface/addArea",
+              data: params
+            })
             .then(function(res) {
               d.$data.areas.push(area);
             })
             .catch(function(err) {
               console.log(err);
             });
-
         },
         render: h => {
           return h(area_add_modal, {
@@ -329,7 +343,7 @@ export default {
       let params = new URLSearchParams();
       var param = {};
       if (area != "" && area) param.parentAreaId = area;
-      else param.parentAreaId = "6941139967a311e8a93e1843420641b8";
+      //else param.parentAreaId = "6941139967a311e8a93e1843420641b8";
       if (e && typeof e == "number") params.append("pagenum", parseInt(e));
       params.append("param", JSON.stringify(param));
       this.$ajax({
