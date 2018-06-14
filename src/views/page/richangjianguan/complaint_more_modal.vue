@@ -1,7 +1,7 @@
 <template>
     <div class="modal_complaint">
         <Row class="box_card" style="margin-top:10px;">
-            <Col span="12" style="line-height: 20px;margin-top:5px;">编号:{{current_data.id}}</Col>
+            <Col span="12" style="line-height: 20px;margin-top:5px;">流水单号:{{current_data.complaintNo}}</Col>
             <Col span="12" style="line-height: 20px;margin-top:5px;">公司:{{current_data.company}}</Col>
             <Col span="12" style="line-height: 20px;margin-top:5px;">区域:{{current_data.area}}</Col>
             <Col span="12" style="line-height: 20px;margin-top:5px;">状态:{{current_data.status}}</Col>
@@ -51,49 +51,51 @@
     </div>
 </template>
 <script>
-    export default {
-        props:{
-            prop_value:''
-        },
-        data:()=>{
-            return {
-                current_data:""
-            };
-        },
-        methods:{
-            getStatus:function(){
-                let status=1;
-                if(this.$data.current_data.status=='处理中'){
-                    status=2;
-                }
-                if(this.$data.current_data.status=='完成'){
-                    status=3;
-                }
-                return status;
-            }
-        },
-        mounted:function(){
-            this.$data.current_data=JSON.parse(JSON.stringify(this.$props.prop_value));
-        }
+export default {
+  props: {
+    prop_value: ""
+  },
+  data: () => {
+    return {
+      current_data: ""
+    };
+  },
+  methods: {
+    getStatus: function() {
+      let status = 1;
+      if (this.$data.current_data.status == "处理中") {
+        status = 2;
+      }
+      if (this.$data.current_data.status == "完成") {
+        status = 3;
+      }
+      return status;
     }
+  },
+  mounted: function() {
+    this.$data.current_data = JSON.parse(
+      JSON.stringify(this.$props.prop_value)
+    );
+  }
+};
 </script>
 <style scoped>
-.modal_complaint{
-    height:500px;
-    overflow: scroll;
+.modal_complaint {
+  height: 500px;
+  overflow: scroll;
 }
-.modal_complaint::-webkit-scrollbar{
-  display:none;
+.modal_complaint::-webkit-scrollbar {
+  display: none;
 }
-.box_card{
-    font-size: 13px;
-    padding: 5px;
+.box_card {
+  font-size: 13px;
+  padding: 5px;
 }
-.row_card{
-    padding: 5px;
+.row_card {
+  padding: 5px;
 }
-.line{
-    height:1px;
-    background-color: rgba(116, 116, 116, 0.63)
+.line {
+  height: 1px;
+  background-color: rgba(116, 116, 116, 0.63);
 }
 </style>

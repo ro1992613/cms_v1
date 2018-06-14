@@ -24,7 +24,7 @@
               </Row>
             </Col>
             <Col span="10"  style="height: 95%;">
-                <div v-on:click="showBackground()" class="card"  style="height: 100%;">
+                <div v-on:click="" class="card"  style="height: 100%;">
                   <my-map></my-map>
                 </div>
             </Col>

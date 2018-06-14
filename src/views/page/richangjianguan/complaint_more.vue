@@ -14,32 +14,32 @@
         </Row>
         <Row class="box_card">
             <Col span="3" style="padding-right:10px">
-                <Input placeholder="输入编号"></Input>
+                <Input placeholder="输入流水单号" ref="no" v-model="input_no"></Input>
             </Col>
-            <Col span="3" style="padding-right:10px">
-                <Select placeholder="选择公司">
+            <Col span="3" style="padding-right:10px;width:200px">
+                <Select placeholder="选择公司" ref="company" v-model="input_company">
                     <Option v-for="item in companyList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
             </Col>
             <Col span="3" style="padding-right:10px">
-                <Select placeholder="选择处理状态">
+                <Select placeholder="选择处理状态" ref="status" v-model="input_status">
                     <Option v-for="item in statusList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
             </Col>
             <Col span="3" style="padding-right:10px">
-                <Select placeholder="选择区域">
+                <Select placeholder="选择区域" ref="area" v-model="input_area">
                     <Option v-for="item in areaList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
             </Col>
             <Col span="4" style="padding-right:10px">
-                <Button type="primary" icon="ios-search">查询</Button>
+                <Button type="primary" icon="ios-search" @click="get_data">查询</Button>
             </Col>
         </Row>
         <Row class="box_card">
             <Table stripe :columns="latest_complaint_column" :data="latest_complaint"></Table>
         </Row>
         <Row class="box_card">
-            <Page :total="pageCount" :current="pageCurrent" :page-size="pageSize" size="small" show-total show-elevator></Page>
+            <Page :total="pageCount" :current="pageCurrent" :page-size="pageSize" size="small" show-total show-elevator @on-change="get_data"></Page>
         </Row>
     </div>
 </template>
@@ -53,26 +53,17 @@ export default {
   },
   data() {
     return {
-      pageSize: 20,
+      input_no:'',
+      input_company:'',
+      input_status:'',
+      input_area:'',
+      pageSize: 10,
       pageCount: 100,
       pageCurrent: 1,
-      companyList: [
-        {
-          value: "所有",
-          label: "所有"
-        },
-        {
-          value: "ofo",
-          label: "ofo"
-        },
-        {
-          value: "摩拜",
-          label: "摩拜"
-        }
-      ],
+      companyList: [],
       statusList: [
         {
-          value: "全部",
+          value: "",
           label: "全部"
         },
         {
@@ -88,180 +79,10 @@ export default {
           label: "完成"
         }
       ],
-      areaList: [
-        {
-          value: "所有",
-          label: "所有"
-        },
-        {
-          value: "武侯区",
-          label: "武侯区"
-        },
-        {
-          value: "成华区",
-          label: "成华区"
-        },
-        {
-          value: "锦江区",
-          label: "锦江区"
-        },
-        {
-          value: "青羊区",
-          label: "青羊区"
-        },
-        {
-          value: "金牛区",
-          label: "金牛区"
-        },
-        {
-          value: "龙泉驿区",
-          label: "龙泉驿区"
-        },
-        {
-          value: "双流区",
-          label: "双流区"
-        },
-        {
-          value: "温江区",
-          label: "温江区"
-        },
-        {
-          value: "郫都区",
-          label: "郫都区"
-        },
-        {
-          value: "青白江区",
-          label: "青白江区"
-        },
-        {
-          value: "新都区",
-          label: "新都区"
-        }
-      ],
-      latest_complaint: [
-        {
-          id: "025",
-          company: "摩拜",
-          area: "锦江区",
-          time: "2018-05-28 16:30:05",
-          status: "未处理",
-          msg: "服务人员态度差",
-          deal_time: "",
-          deal_msg: "",
-          complete_time: "",
-          complete_msg: ""
-        },
-        {
-          id: "025",
-          company: "ofo",
-          area: "青羊区",
-          time: "2018-05-28 14:32:25",
-          status: "未处理",
-          msg: "服务质量差",
-          deal_time: "",
-          deal_msg: "",
-          complete_time: "",
-          complete_msg: ""
-        },
-        {
-          id: "025",
-          company: "ofo",
-          area: "金牛区",
-          time: "2018-05-28 13:31:14",
-          status: "未处理",
-          msg: "服务质量差",
-          deal_time: "",
-          deal_msg: "",
-          complete_time: "",
-          complete_msg: ""
-        },
-        {
-          id: "025",
-          company: "摩拜",
-          area: "成华区",
-          time: "2018-05-28 10:05:05",
-          status: "未处理",
-          msg: "服务人员态度差",
-          deal_time: "",
-          deal_msg: "",
-          complete_time: "",
-          complete_msg: ""
-        },
-        {
-          id: "025",
-          company: "ofo",
-          area: "金牛区",
-          time: "2018-05-27 10:05:05",
-          status: "处理中",
-          msg: "服务质量差",
-          deal_time: "2018-05-27 12:05:05",
-          deal_msg: "已经发送给服务企业",
-          complete_time: "",
-          complete_msg: ""
-        },
-        {
-          id: "025",
-          company: "摩拜",
-          area: "锦江区",
-          time: "2018-05-26 10:05:05",
-          status: "处理中",
-          msg: "服务人员态度差",
-          deal_time: "2018-05-27 12:05:05",
-          deal_msg: "已经发送给服务企业",
-          complete_time: "",
-          complete_msg: ""
-        },
-        {
-          id: "025",
-          company: "ofo",
-          area: "锦江区",
-          time: "2018-05-25 10:05:05",
-          status: "未处理",
-          msg: "服务质量差",
-          deal_time: "",
-          deal_msg: "",
-          complete_time: "",
-          complete_msg: ""
-        },
-        {
-          id: "025",
-          company: "摩拜",
-          area: "青羊区",
-          time: "2018-05-24 10:05:05",
-          status: "未处理",
-          msg: "服务人员态度差",
-          deal_time: "",
-          deal_msg: "",
-          complete_time: "",
-          complete_msg: ""
-        },
-        {
-          id: "025",
-          company: "ofo",
-          area: "锦江区",
-          time: "2018-04-28 10:05:05",
-          status: "完成",
-          msg: "服务质量差",
-          deal_time: "2018-04-28 12:05:05",
-          deal_msg: "已经发送给服务企业",
-          complete_time: "2018-04-28 12:05:05",
-          complete_msg: "收到投诉，限期整改"
-        },
-        {
-          id: "025",
-          company: "摩拜",
-          area: "锦江区",
-          time: "2018-03-28 10:0:52",
-          status: "完成",
-          msg: "服务人员态度差",
-          deal_time: "2018-03-28 10:35:05",
-          deal_msg: "已经发送给服务企业",
-          complete_time: "2018-04-29 12:05:05",
-          complete_msg: "收到投诉，对相关人员进行处理"
-        }
-      ],
+      areaList: [],
+      latest_complaint: [],
       latest_complaint_column: [
-        { title: "编号", key: "id" },
+        { title: "流水单号", key: "complaintNo" },
         { title: "公司", key: "company" },
         { title: "区域", key: "area" },
         { title: "时间", key: "time" },
@@ -328,9 +149,76 @@ export default {
   methods: {
     goback: function() {
       this.$router.go(-1);
+    },
+    get_company_date: function() {
+      var d = this;
+      this.$ajax({
+        method: "post",
+        url: this.$uri + "mapInterface/getCompanyData"
+      })
+        .then(function(res) {
+          res.data.rows.splice(0, 0, { value: "", label: "所有" });
+          d.$data.companyList = res.data.rows;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    get_area_date: function(e) {
+      var d = this;
+      var parentId = "6941139967a311e8a93e1843420641b8";
+      if (e) parentId = e;
+      let params = new URLSearchParams();
+      params.append("parentId", parentId);
+      this.$ajax({
+        method: "post",
+        url: this.$uri + "mapInterface/getAreaData",
+        data: params
+      })
+        .then(function(res) {
+          res.data.rows.splice(0, 0, { value: "", label: "成都市" });
+          d.$data.areaList = res.data.rows;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    get_data: function(e) {
+      var d = this;
+      let params = new URLSearchParams();
+      if (e && parseInt(e)) {
+        var pagenum = parseInt(e);
+        if (pagenum) params.append("pagenum", pagenum);
+      }
+      let id = this.$data.input_no;
+      let company = this.$data.input_company;
+      let status = this.$data.input_status;
+      let area = this.$data.input_area;
+      var param = {};
+      if (id != "" && id) param.id = id;
+      if (company != "" && company) param.company = company;
+      if (status != "" && status) param.status = status;
+      if (area != "" && area) param.area = area;
+      params.append("param", JSON.stringify(param));
+      this.$ajax({
+        method: "post",
+        url: this.$uri + "mapInterface/getComplaintList",
+        data: params
+      })
+        .then(function(res) {
+          d.$data.latest_complaint = res.data.rows;
+          d.$data.pageCount = res.data.total;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
   },
-  mounted: function() {}
+  mounted: function() {
+    this.get_company_date();
+    this.get_area_date();
+    this.get_data();
+  }
 };
 </script>
 <style scoped>

@@ -21,9 +21,9 @@
                     </Col>
                     <Col span="6" style="height:100%">
                         <div v-on:click="showBackground()" style="height:100%;text-align: center;">
-                            <span style="font-size: 25px;color:#bbb;"><Tag  color="#4C556E"></Tag> 维护人员</span>
+                            <span style="font-size: 25px;color:#bbb;"><Tag  color="#4C556E"></Tag> 日活跃车辆</span>
                             <span style="font-size: 50px;color:rgb(180, 255, 255);font-weight:bold;">
-                                <count-to :end-val="9214"></count-to>
+                                <count-to :end-val="16552585"></count-to>
                             </span>
                         </div>
                     </Col>

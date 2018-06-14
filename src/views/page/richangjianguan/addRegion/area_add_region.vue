@@ -15,92 +15,128 @@
 <script>
 var markmap = null;
 var drawingManager = null;
+var points = "";
 var overlays = [];
-var rightclkFunc = function(e){
-    var drawMode = drawingManager.getDrawingMode();
-    if(drawMode==BMAP_DRAWING_POLYGON||drawMode==BMAP_DRAWING_RECTANGLE)
-        return;
-    var rightMenu = new BMap.ContextMenu();
-    rightMenu.addItem(new BMap.MenuItem('返回',function(){
+var rightclkFunc = function(e) {
+  var drawMode = drawingManager.getDrawingMode();
+  if (drawMode == BMAP_DRAWING_POLYGON || drawMode == BMAP_DRAWING_RECTANGLE)
+    return;
+  var rightMenu = new BMap.ContextMenu();
+  rightMenu.addItem(
+    new BMap.MenuItem(
+      "返回",
+      function() {
         clearAll();
         markmap.removeContextMenu(rightMenu);
         backPage();
-    },{width:140,id:'addarearect'}));
-    rightMenu.addItem(new BMap.MenuItem('添加矩形区域',function(){
+      },
+      { width: 140, id: "addarearect" }
+    )
+  );
+  rightMenu.addItem(
+    new BMap.MenuItem(
+      "添加矩形区域",
+      function() {
         addAreaRect(e.point);
         markmap.removeContextMenu(rightMenu);
-    },{width:140,id:'addarearect'}));
-    rightMenu.addItem(new BMap.MenuItem('添加不规则区域',function(){
+      },
+      { width: 140, id: "addarearect" }
+    )
+  );
+  rightMenu.addItem(
+    new BMap.MenuItem(
+      "添加不规则区域",
+      function() {
         addAreaPolygon(e.point);
         markmap.removeContextMenu(rightMenu);
-    },{width:140,id:'addareapolygon'}));
-    rightMenu.addItem(new BMap.MenuItem('清除新加区域',function(){
+      },
+      { width: 140, id: "addareapolygon" }
+    )
+  );
+  rightMenu.addItem(
+    new BMap.MenuItem(
+      "清除新加区域",
+      function() {
         clearLastArea();
         markmap.removeContextMenu(rightMenu);
-    },{width:140,id:'cleararea'}));
-    rightMenu.addItem(new BMap.MenuItem('附近投放区',function(){
+      },
+      { width: 140, id: "cleararea" }
+    )
+  );
+  rightMenu.addItem(
+    new BMap.MenuItem(
+      "附近投放区",
+      function() {
         loadNearbyPutinArea(e.point);
         markmap.removeContextMenu(rightMenu);
-    },{width:140,id:'putin'}));
-    rightMenu.addItem(new BMap.MenuItem('附近禁投区',function(){
+      },
+      { width: 140, id: "putin" }
+    )
+  );
+  rightMenu.addItem(
+    new BMap.MenuItem(
+      "附近禁投区",
+      function() {
         loadNearbyProhibitPutinArea(e.point);
         markmap.removeContextMenu(rightMenu);
-    },{width:140,id:'exputin'}));
-    markmap.addContextMenu(rightMenu);
+      },
+      { width: 140, id: "exputin" }
+    )
+  );
+  markmap.addContextMenu(rightMenu);
 };
-function addAreaRect(point){
-    drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);
-    drawingManager.open();
-    markmap.centerAndZoom(point,20);
+function addAreaRect(point) {
+  drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);
+  drawingManager.open();
+  markmap.centerAndZoom(point, 20);
 }
 
-function addAreaPolygon(point){
-    drawingManager.setDrawingMode(BMAP_DRAWING_POLYGON);
-    drawingManager.open();
-    markmap.centerAndZoom(point,20);
+function addAreaPolygon(point) {
+  drawingManager.setDrawingMode(BMAP_DRAWING_POLYGON);
+  drawingManager.open();
+  markmap.centerAndZoom(point, 20);
 }
 
 /**
  * 清除新加区域
  */
-function clearLastArea(){
-    var ov = overlays.pop();
-    markmap.removeOverlay(ov);
+function clearLastArea() {
+  var ov = overlays.pop();
+  markmap.removeOverlay(ov);
 }
 
 /**
  * 加载在当前地图视野范围内并在当前位置附近1.5km的投放区
  * @param {*} point --当前位置
  */
-function loadNearbyPutinArea(point){
-
-}
+function loadNearbyPutinArea(point) {}
 
 /**
  * 加载在当前地图视野范围内并在当前位置附近1.5km的禁投区
  * @param {*} point --当前位置
  */
-function loadNearbyProhibitPutinArea(point){
-
-}
+function loadNearbyProhibitPutinArea(point) {}
 
 /**
  * 返回调用页
  */
-function backPage(){
-    window.history.go(-1);
+function backPage() {
+  window.history.go(-1);
 }
 
 function clearAll() {
-    if(markmap==null)
-        return;
-    for(var i = 0; i < overlays.length; i++){
-        markmap.removeOverlay(overlays[i]);
-    }
-    overlays.length = 0;
+  if (markmap == null) return;
+  for (var i = 0; i < overlays.length; i++) {
+    markmap.removeOverlay(overlays[i]);
+  }
+  overlays.length = 0;
+  points = "";
 }
 
-function draw(data){
+function draw(data) {
+  var ds = data.split("&");
+  for (let i = 0; i < ds.length; i++) {
+    let element = ds[i];
     var styleOptions = {
       strokeColor: "red", //边线颜色。
       fillColor: "red", //填充颜色。当参数为空时，圆形将没有填充效果。
@@ -109,32 +145,59 @@ function draw(data){
       fillOpacity: 0.6, //填充的透明度，取值范围0 - 1。
       strokeStyle: "solid" //边线的样式，solid或dashed。
     };
-    var polygon=new BMap.Polygon(data.areacoords,styleOptions);
+    var polygon = new BMap.Polygon(element, styleOptions);
     overlays.push(polygon);
     markmap.addOverlay(polygon);
+  }
 }
 
-var  temp=null;
+var temp = null;
 export default {
-    props:{
-        id:'',
-        areacoords:''
+  props: {
+    id: "",
+    areacoords: ""
+  },
+  methods: {
+    save: function() {
+      var isedit = this.$route.query.isedit;
+      if(isedit){
+        var d = this;
+      var coords = points;
+      var id = d.$route.query.id;
+      let params = new URLSearchParams();
+      params.append("areaCoordinate", coords);
+      params.append("id", id);
+      d.$ajax({
+        method: "post",
+        url: d.$uri + "mapInterface/updateAreaCoordinate",
+        data: params
+      })
+        .then(function(res) {
+          d.$Message.success("编辑成功");
+          clearAll();
+          d.$router.push("/richangjianguan/area");
+        })
+        .catch(function(err) {
+          d.$Message.warning("保存失败");
+          console.log(err);
+          clearAll();
+          d.$router.push("/richangjianguan/area");
+        });
+      }else{
+        d.$Message.warning("不能编辑行政区域");
+      }
+      
     },
-    methods:{
-        save:function(){
-            var coords = localStorage.getItem("coords");
-            clearAll();
-            this.$router.push('/richangjianguan/area');
-        },
-        goback:function(){
-            clearAll();
-            this.$router.go(-1);
-        },
-        clearall:function(){
-            clearAll();
-        }
+    goback: function() {
+      clearAll();
+      this.$router.go(-1);
     },
-  mounted: function() {    
+    clearall: function() {
+      this.$Message.success("清除成功！");
+      clearAll();
+    }
+  },
+  mounted: function() {
     markmap = new BMap.Map("markmap"); // 创建Map实例
     markmap.centerAndZoom(new BMap.Point(104.072051, 30.662979), 13); // 初始化地图,设置中心点坐标和地图级别
     markmap.enableScrollWheelZoom(true); // 开启鼠标滚轮缩放
@@ -168,7 +231,6 @@ export default {
     });
     //添加鼠标绘制工具监听事件，用于获取绘制结果
     drawingManager.addEventListener("overlaycomplete", function(e) {
-        clearAll();
       overlays.push(e.overlay);
       drawingManager.close();
       drawingManager.setDrawingMode(0);
@@ -176,27 +238,50 @@ export default {
 
     drawingManager.addEventListener("polygoncomplete", function(e) {
       var coordlist = e.getPath();
-      var strCoords = '{"areacoords":[';
-      for (var i = 0; i < coordlist.length; i++) {
-        var _lat = coordlist[i].lat;
-        var _lng = coordlist[i].lng;
-        strCoords += '{"lng":' + _lng + ',"lat":' + _lat + "}";
-        if (i < coordlist.length - 1) strCoords += ",";
+      var strCoords='';
+      if (points) {
+        
+        for (var i = 0; i < coordlist.length; i++) {
+          var _lat = coordlist[i].lat;
+          var _lng = coordlist[i].lng;
+          strCoords += _lng + "," + _lat;
+          if (i < coordlist.length - 1) strCoords += ";";
+        }
+        points = points + "&" + strCoords;
+        //localStorage.setItem("coords", strCoords);
+      } else {
+        for (var i = 0; i < coordlist.length; i++) {
+          var _lat = coordlist[i].lat;
+          var _lng = coordlist[i].lng;
+          strCoords += _lng + "," + _lat;
+          if (i < coordlist.length - 1) strCoords += ";";
+        }
+        points = strCoords;
+        //localStorage.setItem("coords", strCoords);
       }
-      strCoords += "]}";
-      localStorage.setItem("coords", strCoords);
     });
     drawingManager.addEventListener("rectanglecomplete", function(e) {
       var coordlist = e.getPath();
-      var strCoords = '{"areacoords":[';
-      for (var i = 0; i < coordlist.length; i++) {
-        var _lat = coordlist[i].lat;
-        var _lng = coordlist[i].lng;
-        strCoords += '{"lng":' + _lng + ',"lat":' + _lat + "}";
-        if (i < coordlist.length - 1) strCoords += ",";
+      var strCoords = "";
+
+      if (points) {
+        for (var i = 0; i < coordlist.length; i++) {
+          var _lat = coordlist[i].lat;
+          var _lng = coordlist[i].lng;
+          strCoords += _lng + "," + _lat;
+          if (i < coordlist.length - 1) strCoords += ";";
+        }
+        points = points + "&" + strCoords;
+      } else {
+        for (var i = 0; i < coordlist.length; i++) {
+          var _lat = coordlist[i].lat;
+          var _lng = coordlist[i].lng;
+          strCoords += _lng + "," + _lat;
+          if (i < coordlist.length - 1) strCoords += ";";
+        }
+        points = strCoords;
+        //localStorage.setItem("coords", strCoords);
       }
-      strCoords += "]}";
-      localStorage.setItem("coords", strCoords);
     });
 
     markmap.addEventListener("click", function(e) {
@@ -210,9 +295,30 @@ export default {
       markmap.centerAndZoom(e.point, 20);
     });
     markmap.addEventListener("rightclick", rightclkFunc);
+
+    var id = this.$route.query.id;
+
+    let params = new URLSearchParams();
+    params.append("id", id);
+    this.$ajax({
+      method: "post",
+      url: this.$uri + "mapInterface/getAreacCoordinateById",
+      data: params
+    })
+      .then(function(res) {
+        var areacCoordinate = res.data.areacCoordinate;
+        points = areacCoordinate;
+        draw(areacCoordinate);
+        // draw({ areacoords: areacCoordinate });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 };
 </script>
 <style scoped>
-#markmap{height:100%}
+#markmap {
+  height: 100%;
+}
 </style>

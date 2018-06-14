@@ -1,7 +1,7 @@
 <template>
     <div>
         <br>
-        <Input v-model="current_data.id">
+        <Input v-model="current_data.areaNumber" disabled>
             <span slot="prepend">编号</span>
         </Input>
         <br>
@@ -9,18 +9,8 @@
             <span slot="prepend">名称</span>
         </Input>
         <br>
-        <Select v-model="current_data.father_area" label="所属区域" >
-            <Option value="锦江区" key="锦江区">锦江区</Option>
-            <Option value="成华区" key="成华区">成华区</Option>
-            <Option value="武侯区" key="武侯区">武侯区</Option>
-            <Option value="金牛区" key="金牛区">金牛区</Option>
-            <Option value="青羊区" key="青羊区">青羊区</Option>
-            <Option value="双流区" key="双流区">双流区</Option>
-            <Option value="龙泉驿区" key="龙泉驿区">龙泉驿区</Option>
-            <Option value="郫都区" key="郫都区">郫都区</Option>
-            <Option value="温江区" key="温江区">温江区</Option>
-            <Option value="新都区" key="新都区">新都区</Option>
-            <Option value="青白江区" key="青白江区">青白江区</Option>
+       <Select placeholder="所属区域" ref="area"  v-model="current_data.parentAreaId">
+            <Option v-for="item in areaList" :value="item.value" :key="item.value">{{ item.label }}</Option>
         </Select>
         <br>
         <br>
@@ -57,27 +47,52 @@
     </div>
 </template>
 <script>
-    export default {
-        props:{
-            prop_value:''
-        },
-        data:()=>{
-            return {
-                current_data:''
-            };
-        },
-        methods:{
-        },
-        mounted:function(){
-            let data=this.$props.prop_value;
-            if(data.tags){
-                data.tags=data.tags.split(",");
-            }else{
-                data.tags=[];
-            }
-            this.$data.current_data=data
-        }
+export default {
+  props: {
+    prop_value: ""
+  },
+  data: () => {
+    return {
+      current_data: '',
+      areaList: []
+    };
+  },
+  methods: {
+    get_area_date: function(e) {
+      var d = this;
+      var parentId = "6941139967a311e8a93e1843420641b8";
+      if (e) parentId = e;
+      let params = new URLSearchParams();
+      params.append("parentId", parentId);
+      this.$ajax({
+        method: "post",
+        url: this.$uri + "mapInterface/getAreaData",
+        data: params
+      })
+        .then(function(res) {
+          res.data.rows.splice(0, 0, {
+            value: "6941139967a311e8a93e1843420641b8",
+            label: "成都市"
+          });
+          d.$data.areaList = res.data.rows;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
+  },
+  mounted: function() {
+    let data = this.$props.prop_value;
+    if (data.tags) {
+      data.tags = data.tags.split(",");
+    } else {
+      data.tags = [];
+    }
+    this.$data.current_data = data;
+    this.$data.current_data.areaNumber= Date.parse(new Date());
+    this.get_area_date();
+  }
+};
 </script>
 <style scoped>
 </style>

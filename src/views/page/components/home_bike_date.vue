@@ -479,7 +479,7 @@ export default {
           { name: "ofo", type: "bar" },
           { name: "其它", type: "bar" },
           {
-            name: "GDP占比",
+            name: "数量",
             type: "pie",
             center: ["75%", "35%"],
             radius: "28%",

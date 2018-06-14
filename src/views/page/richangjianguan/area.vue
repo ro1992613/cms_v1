@@ -5,12 +5,12 @@
                 <Input placeholder="查询条件"></Input>
             </Col>
             <Col span="3" style="padding-right:10px">
-                <Select placeholder="选择区域">
+                <Select placeholder="选择区域" v-model="selected_area_id" ref="area">
                     <Option v-for="item in areaList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
             </Col>
             <Col span="4" style="padding-right:10px">
-                <Button type="primary" icon="ios-search">查询</Button>
+                <Button type="primary" icon="ios-search" @click="get_data">查询</Button>
             </Col>
         </Row>
         <Row class="box_card">
@@ -28,7 +28,7 @@
             
         </Row>
         <Row class="box_card">
-            <Page :total="pageCount" :current="pageCurrent" :page-size="pageSize" size="small" show-total show-elevator></Page>
+            <Page :total="pageCount" :current="pageCurrent" :page-size="pageSize" size="small" show-total show-elevator @on-change="get_data"></Page>
         </Row>
     </div>
 </template>
@@ -39,183 +39,14 @@ import area_add_modal from "./area_add_modal.vue";
 export default {
   data() {
     return {
+      selected_area_id:'',
       pageSize: 20,
       pageCount: 100,
       pageCurrent: 1,
-      areaList: [
-        {
-          value: "所有",
-          label: "所有"
-        },
-        {
-          value: "武侯区",
-          label: "武侯区"
-        },
-        {
-          value: "成华区",
-          label: "成华区"
-        },
-        {
-          value: "锦江区",
-          label: "锦江区"
-        },
-        {
-          value: "青羊区",
-          label: "青羊区"
-        },
-        {
-          value: "金牛区",
-          label: "金牛区"
-        },
-        {
-          value: "龙泉驿区",
-          label: "龙泉驿区"
-        },
-        {
-          value: "双流区",
-          label: "双流区"
-        },
-        {
-          value: "温江区",
-          label: "温江区"
-        },
-        {
-          value: "郫都区",
-          label: "郫都区"
-        },
-        {
-          value: "青白江区",
-          label: "青白江区"
-        },
-        {
-          value: "新都区",
-          label: "新都区"
-        }
-      ],
-      areas: [
-        {
-          id: "1",
-          name: "锦江区",
-          father_area: "锦江区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "2",
-          name: "武侯区",
-          father_area: "武侯区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "3",
-          name: "成华区",
-          father_area: "成华区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "4",
-          name: "青羊区",
-          father_area: "青羊区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "5",
-          name: "金牛区",
-          father_area: "金牛区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "6",
-          name: "双流区",
-          father_area: "双流区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "7",
-          name: "龙泉驿区",
-          father_area: "龙泉驿区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "8",
-          name: "郫都区",
-          father_area: "郫都区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "9",
-          name: "温江区",
-          father_area: "温江区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "10",
-          name: "新都区",
-          father_area: "新都区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "11",
-          name: "青白江区",
-          father_area: "青白江区",
-          type: "行政区域",
-          important: "重要",
-          tags: "禁停,禁投",
-          limit: "300000",
-          bike_num: "250000"
-        },
-        {
-          id: "12",
-          name: "金融城区域",
-          father_area: "武侯区",
-          type: "自定义区域",
-          important: "普通",
-          tags: "",
-          limit: "300000",
-          bike_num: "250000"
-        }
-      ],
+      areaList: [],
+      areas: [],
       areas_column: [
-        { title: "编号", key: "id", width: 80 },
+        { title: "编号", key: "areaNumber", width: 80 },
         {
           title: "名称",
           key: "name"
@@ -228,7 +59,7 @@ export default {
           //   });
           // }
         },
-        { title: "所属区域", key: "father_area" },
+        { title: "所属区域", key: "parentAreaName" },
         { title: "类型", key: "type" },
         {
           title: "重点区域",
@@ -322,17 +153,37 @@ export default {
                         title: "编辑区域",
                         onOk: () => {
                           if (current_data) {
-                            params.row.name = current_data.name;
-                            params.row.important = current_data.important;
-                            params.row.limit = current_data.limit;
-                            params.row.type = current_data.type;
-                            params.row.tags = current_data.tags.join();
+                            let params = new URLSearchParams();
+                            params.append(
+                              "param",
+                              JSON.stringify(current_data)
+                            );
+                            this.$ajax({
+                              method: "post",
+                              url: this.$uri + "mapInterface/updateArea",
+                              data: params
+                            })
+                              .then(function(res) {
+                                params.row.name = current_data.name;
+                                params.row.important = current_data.important;
+                                params.row.limit = current_data.limit;
+                                params.row.type = current_data.type;
+                                params.row.tags = current_data.tags.join();
+                                params.row.parentAreaId =
+                                  current_data.parentAreaId;
+                              })
+                              .catch(function(err) {
+                                console.log(err);
+                              });
                           }
                         },
                         render: h => {
                           return h(area_edit_modal, {
                             props: {
-                              prop_value: params.row
+                              prop_value: {
+                                rows: params.row,
+                                areaList: this.$data.areaList
+                              }
                             },
                             on: {
                               recieveData: v => {
@@ -359,9 +210,15 @@ export default {
                   on: {
                     click: () => {
                       if (params.row.type == "行政区域") {
-                        this.$Message.warning("不能编辑行政区域");
+                        this.$router.push({
+                          path: "/richangjianguan/addRegion",
+                          query: { id: params.row.id, isedit:0}
+                        });
                       } else {
-                        this.$router.push('/richangjianguan/addRegion');
+                        this.$router.push({
+                          path: "/richangjianguan/addRegion",
+                          query: { id: params.row.id, isedit:1}
+                        });
                       }
                     }
                   }
@@ -397,7 +254,36 @@ export default {
     };
   },
   methods: {
+    area_info: function(params) {
+      this.$router.push({
+        path: "/richangjianguan/area_info_modal",
+        query: { params: params.row }
+      });
+    },
+    get_area_date: function(e) {
+      var d = this;
+      var parentId = "6941139967a311e8a93e1843420641b8";
+      if (e) parentId = e;
+      let params = new URLSearchParams();
+      params.append("parentId", parentId);
+      this.$ajax({
+        method: "post",
+        url: this.$uri + "mapInterface/getAreaData",
+        data: params
+      })
+        .then(function(res) {
+          res.data.rows.splice(0, 0, {
+            value: "6941139967a311e8a93e1843420641b8",
+            label: "成都市"
+          });
+          d.$data.areaList = res.data.rows;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
     add_area: function() {
+      var d=this;
       let area = {
         id: "",
         tags: "",
@@ -407,12 +293,28 @@ export default {
         important: "不重要",
         type: "自定义区域"
       };
-      this.$Modal.confirm({
+      d.$Modal.confirm({
         title: "添加区域",
         onOk: () => {
-          console.log(area.tags);
           area.tags = area.tags.join();
-          this.$data.areas.push(area);
+          d.$data.areas.push(area);
+          let params = new URLSearchParams();
+            params.append(
+              "param",
+              JSON.stringify(area)
+            );
+          d.$ajax({
+            method: "post",
+            url: d.$uri + "mapInterface/addArea",
+            data: params
+          })
+            .then(function(res) {
+              d.$data.areas.push(area);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+
         },
         render: h => {
           return h(area_add_modal, {
@@ -420,9 +322,34 @@ export default {
           });
         }
       });
+    },
+    get_data: function(e) {
+      var d = this;
+      let area = this.$data.selected_area_id;
+      let params = new URLSearchParams();
+      var param = {};
+      if (area != "" && area) param.parentAreaId = area;
+      else param.parentAreaId = "6941139967a311e8a93e1843420641b8";
+      if (e && typeof e == "number") params.append("pagenum", parseInt(e));
+      params.append("param", JSON.stringify(param));
+      this.$ajax({
+        method: "post",
+        url: this.$uri + "mapInterface/getAreaListByPage",
+        data: params
+      })
+        .then(function(res) {
+          d.$data.areas = res.data.rows;
+          d.$data.pageCount = res.data.total;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
   },
-  mounted: function() {}
+  mounted: function() {
+    this.get_data();
+    this.get_area_date();
+  }
 };
 </script>
 <style scoped>

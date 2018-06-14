@@ -2,14 +2,15 @@ import Vue from 'vue';
 import iView from 'iview';
 import VueRouter from 'vue-router';
 import Routers from './router';
+import axios from 'axios';
 
 import Util from './libs/util';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
 
 Vue.use(VueRouter);
-
-
+Vue.prototype.$ajax = axios;
+Vue.prototype.$uri ='http://192.168.10.243:2999/';
 Vue.use(iView);
 
 
