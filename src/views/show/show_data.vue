@@ -1,21 +1,21 @@
 <template  >
     <div class="bg">
-        <Row style="height: 10%;">
+        <Row style="height: 8%;">
             <div class="card" style="height: 80%;text-align: center;font-size: 35px;padding-top:8px;font-weight:bold;letter-spacing:3px;">成都市共享单车监管平台</div>
         </Row>
-        <Row style="height: 55%;">
-            <Col span="6" style="height: 100%;">
+        <Row style="height: 57%;">
+            <Col span="5" style="height: 100%;">
               <Row style="height: 20%;">
                 <Col span="12" style="height: 100%;">
                   <div v-on:click="showTotalData()" class="card" style="height: 93%;padding:5px;padding-left:10px;">
                       <span style="font-size: 15px;line-height:15px;">投放总量:</span>
-                     <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="1802770"></count-to> </span>
+                     <span style="text-align: center;font-size: 33px;line-height:33px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="1802770"></count-to> </span>
                   </div>
                 </Col>
                 <Col span="12" style="height: 100%;">
                   <div v-on:click="showTotalData()" class="card" style="height: 93%;padding:5px;padding-left:10px;">
                       <span style="font-size: 15px;line-height:15px;">骑行次数:</span>
-                     <span style="text-align: center;font-size: 38px;line-height:38px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="3125787"></count-to> </span>
+                     <span style="text-align: center;font-size: 33px;line-height:33px;color:rgb(180, 255, 255);font-weight:bold;"> <count-to :end-val="3125787"></count-to> </span>
                   </div>
                 </Col>
               </Row>
@@ -23,13 +23,13 @@
                 <div  v-on:click="showTotalData()" id="company_bike" class="card" style="height:93%;"></div>
               </Row>
             </Col>
-            <Col span="10"  style="height: 95%;">
+            <Col span="12"  style="height: 95%;">
                 <div v-on:click="
                 " class="card"  style="height: 100%;">
                   <my-map></my-map>
                 </div>
             </Col>
-            <Col span="8"  style="height: 100%;">
+            <Col span="7"  style="height: 100%;">
                 <Row  style="height: 50%;">
                     <Col style="height: 100%;" span="12">
                       <div v-on:click="showWeihuData()" id="person_num"  style="height: 90%;" class="card"></div>
@@ -44,10 +44,10 @@
             </Col>
         </Row>
         <Row style="height: 35%;">
-            <Col style="height: 95%;" span="6">
+            <Col style="height: 95%;" span="5">
                 <div v-on:click="showTotalData()" id="bike_area_num" class="card" style="height: 100%;"></div>
             </Col>
-            <Col style="height: 95%;" span="10">
+            <Col style="height: 95%;" span="12">
                 <div v-on:click="showBackground()" class="card content" style="height: 100%;">
                   <Row>
                     <h2>实时消息推送</h2>
@@ -62,7 +62,7 @@
                     </transition-group>
                 </div>
             </Col>
-            <Col style="height: 95%;" span="8">
+            <Col style="height: 95%;" span="7">
                 <div v-on:click="showWeihuData()" id="weihu_date_num" style="height: 100%;" class="card"></div>
             </Col>
         </Row>
@@ -387,18 +387,18 @@ export default {
         },
         data: []
       };
-      let set_series = {
-        areaStyle: { normal: {} },
-        name: "维修投放",
-        type: "bar",
-        label: {
-          normal: {
-            show: true,
-            position: "top"
-          }
-        },
-        data: []
-      };
+      // let set_series = {
+      //   areaStyle: { normal: {} },
+      //   name: "维修投放",
+      //   type: "bar",
+      //   label: {
+      //     normal: {
+      //       show: true,
+      //       position: "top"
+      //     }
+      //   },
+      //   data: []
+      // };
       let bad_series = {
         areaStyle: { normal: {} },
         name: "报废",
@@ -414,7 +414,7 @@ export default {
       for (let i in data) {
         xAxis.data.push(data[i].date);
         fix_series.data.push(data[i].fix);
-        set_series.data.push(data[i].set);
+        //set_series.data.push(data[i].set);
         bad_series.data.push(data[i].bad);
       }
 
@@ -432,7 +432,8 @@ export default {
           }
         },
         legend: {
-          data: ["维修", "维修投放", "报废"],
+         // data: ["维修", "维修投放", "报废"],
+          data: ["维修", "报废"],
           left: 200,
           textStyle: { color: "#eeeeee" }
         },
@@ -445,7 +446,9 @@ export default {
           nameTextStyle: { color: "#eeeeee" },
           axisLabel: { color: "#eeeeee" }
         },
-        series: [fix_series, set_series, bad_series]
+        //series: [fix_series, set_series, bad_series]
+        series: [fix_series
+        , bad_series]
       };
       myChart.setOption(option);
     },
@@ -725,6 +728,7 @@ export default {
 .content {
   overflow: hidden;
 }
+
 </style>
 
 

@@ -217,7 +217,7 @@ export default {
       if (id) params.append("id", id);
       this.$ajax({
         method: "post",
-        url: "http://192.168.10.243:2999/mapInterface/getCompanyInfoById",
+        url: this.$uri + "mapInterface/getCompanyInfoById",
         data: params
       })
         .then(function(res) {

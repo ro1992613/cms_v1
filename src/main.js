@@ -10,7 +10,7 @@ import 'iview/dist/styles/iview.css';
 
 Vue.use(VueRouter);
 Vue.prototype.$ajax = axios;
-Vue.prototype.$uri ='http://192.168.10.243:2999/';
+Vue.prototype.$uri ='http://182.150.46.4:2999/';
 Vue.use(iView);
 
 
